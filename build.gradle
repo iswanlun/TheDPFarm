@@ -12,6 +12,12 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application.
     id 'application'
+
+    //Spotbugs
+    id "com.github.spotbugs" version "4.5.1"
+
+    //Checkstyle
+    id "checkstyle"
 }
 
 repositories {
@@ -31,4 +37,41 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClassName = 'TheDPFarm.App'
+}
+
+//Jacoco 
+apply plugin: 'jacoco'
+
+
+// Configure Checkstyle
+apply plugin: 'checkstyle'
+
+checkstyle {
+    ignoreFailures = true
+    showViolations = false
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        html.enabled = true
+        xml.enabled = false
+    }
+}
+checkstyle {
+    toolVersion = "8.8"
+}
+
+
+// Configure SpotBugs
+spotbugsMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+spotbugs {
+    toolVersion = '4.1.4'
+    ignoreFailures = true
+    showProgress = true
+    effort = 'max'
 }
