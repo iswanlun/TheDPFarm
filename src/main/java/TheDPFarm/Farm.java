@@ -15,9 +15,7 @@ public class Farm {
         this.numFarmers = numFarmers;
     }
 
-    public Farm() {
-        
-    }
+    public Farm() {}
 
     public void addFarmer() {
         numFarmers++;

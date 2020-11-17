@@ -4,12 +4,13 @@
  * Make some sort of interaction interface.
  * launch the whole thing from main.
  * ???
+ * refrence: http://www.blackwasp.co.uk/GofPatterns.aspx
  */
 package TheDPFarm;
 
 public class App {
     public String getGreeting() {
-        return "Hello world.";
+        return "A humble farmer, tending to my code...";
     }
 
     public static void main(String[] args) {
