@@ -2,6 +2,19 @@
 
 package TheDPFarm.animals;
 
-public enum AnimalState {
-    Healthy, Sick, HarvestReady, SlaughterReady
+public class AnimalState {
+
+    private state currentState;
+
+    public enum state {
+        Healthy, Sick, HarvestReady, SlaughterReady
+    }
+    
+    public state getState() {
+        return currentState;
+    }
+    
+    public void setState(state newState) {
+        currentState = newState;
+    }
 }
