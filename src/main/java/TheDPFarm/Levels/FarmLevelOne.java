@@ -1,15 +1,11 @@
-package TheDPFarm.Levels;
+package TheDPFarm.levels;
 
-import TheDPFarm.Farm;
+import TheDPFarm.levels.Farm;
 
-public class FarmLevelOne extends Farm {
+public class FarmLevelOne implements Farm {
 
-    private Farm farm;
-
-    public FarmLevelOne(Farm farm) {
-        this.farm = farm;
+    public FarmLevelOne() {
+        
     }
-    
-    public FarmLevelOne() {}
-    
+
 }

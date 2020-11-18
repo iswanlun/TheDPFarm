@@ -1,4 +1,4 @@
-package TheDPFarm.Levels;
+package TheDPFarm.levels;
 
 public class FarmLevelThree extends FarmLevelTwo {
     

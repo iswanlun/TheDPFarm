@@ -1,4 +1,4 @@
-package TheDPFarm.Levels;
+package TheDPFarm.levels;
 
 public class FarmLevelTwo extends FarmLevelOne {
 
@@ -8,6 +8,6 @@ public class FarmLevelTwo extends FarmLevelOne {
         this.farm = farm;
     }
 
-    public FarmLevelTwo() {}
+
     
 }
