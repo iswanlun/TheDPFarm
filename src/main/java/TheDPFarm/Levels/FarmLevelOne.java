@@ -7,10 +7,10 @@ import TheDPFarm.levels.Farm;
 public class FarmLevelOne implements Farm {
 
     private int id;
-    private ArrayList<Acre> _acres;
+    private ArrayList<Acre> acres;
 
     public FarmLevelOne() {
-        _acres = new ArrayList<>();
+        acres = new ArrayList<>();
     }
 
     public int getFarmId() {
@@ -19,6 +19,10 @@ public class FarmLevelOne implements Farm {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int size() {
+        return acres.size();
     }
 
 }

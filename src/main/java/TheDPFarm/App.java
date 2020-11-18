@@ -8,12 +8,29 @@
  */
 package TheDPFarm;
 
+import java.util.Scanner;
+
+import TheDPFarm.util.CommandProcessor;
+
 public class App {
+
     public String getGreeting() {
         return "A humble farmer, tending to my code...";
     }
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
+
+        Scanner in = new Scanner(System.in);
+        CommandProcessor cmd = new CommandProcessor();
+
+        while(true) {
+            String line = in.nextLine();
+            if(line.equalsIgnoreCase("q")) {
+                in.close();
+                break;
+            }
+            cmd.process(line);
+        }
     }
 }
