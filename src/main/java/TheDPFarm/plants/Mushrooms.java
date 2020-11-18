@@ -2,10 +2,12 @@ package TheDPFarm.plants;
 
 import java.util.Random;
 
+import TheDPFarm.plants.PlantState.state;
+
 public class Mushrooms implements Crops {
 
     private PlantState currentState;
-    private final String type = "Mushrooms";
+    private final String type = "MUSHROOMS";
     private int age;
     private int harvestAge = 17;
     private double costPerAcre = 270.0;
@@ -13,9 +15,9 @@ public class Mushrooms implements Crops {
     
     private Random randGenerator;
 
-    public Mushrooms() {
+    public Mushrooms(PlantState state) {
         this.age = 0;
-        this.currentState = PlantState.Seed;
+        this.currentState = state;
         randGenerator = new Random();
     }
 
@@ -37,27 +39,22 @@ public class Mushrooms implements Crops {
     @Override
     public void notifyDay() {
         this.age++;
-
-        if(age == harvestAge) {
-            currentState = PlantState.ReadyForHarvest;
+        if (age < 3) {
+            currentState.advanceState();
+        } else if(age == harvestAge) {
+            currentState.advanceState();
         } else if ((age - harvestAge) > 3) {
-            currentState = PlantState.Dead;
-        }
-
-        if(currentState.equals(PlantState.Seed)) {
-            currentState = PlantState.Seedling;
-        } else if (currentState.equals(PlantState.Seedling)) {
-            currentState = PlantState.Healthy;
+            currentState.advanceState();
         }
     }
 
     @Override
     public void notifyNight() {
-        int sickOdds = randGenerator.nextInt(17); //% 1/17 chance of early death
+        int sickOdds = randGenerator.nextInt(15); //%5 chance of early death
         if (sickOdds == 2) {
-            currentState = PlantState.Sick;
-        } else if (currentState.equals(PlantState.Sick)) {
-            currentState = PlantState.Dead;
+            currentState.setState(state.Sick);
+        } else if (currentState.getState().equals(state.Sick)) {
+            currentState.advanceState();
         }
     }
 
@@ -74,6 +71,5 @@ public class Mushrooms implements Crops {
     @Override
     public int getDaysToHarvest() {
         return harvestAge - age;
-    } 
-    
+    }
 }

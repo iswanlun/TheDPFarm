@@ -2,10 +2,12 @@ package TheDPFarm.plants;
 
 import java.util.Random;
 
+import TheDPFarm.plants.PlantState.state;
+
 public class Soybeans implements Crops {
 
     private PlantState currentState;
-    private final String type = "Soybeans";
+    private final String type = "SOYBEANS";
     private int age;
     private int harvestAge = 15;
     private double costPerAcre = 180.0;
@@ -13,9 +15,9 @@ public class Soybeans implements Crops {
     
     private Random randGenerator;
 
-    public Soybeans() {
+    public Soybeans(PlantState state) {
         this.age = 0;
-        this.currentState = PlantState.Seed;
+        this.currentState = state;
         randGenerator = new Random();
     }
 
@@ -37,17 +39,12 @@ public class Soybeans implements Crops {
     @Override
     public void notifyDay() {
         this.age++;
-
-        if(age == harvestAge) {
-            currentState = PlantState.ReadyForHarvest;
+        if (age < 3) {
+            currentState.advanceState();
+        } else if(age == harvestAge) {
+            currentState.advanceState();
         } else if ((age - harvestAge) > 3) {
-            currentState = PlantState.Dead;
-        }
-
-        if(currentState.equals(PlantState.Seed)) {
-            currentState = PlantState.Seedling;
-        } else if (currentState.equals(PlantState.Seedling)) {
-            currentState = PlantState.Healthy;
+            currentState.advanceState();
         }
     }
 
@@ -55,9 +52,9 @@ public class Soybeans implements Crops {
     public void notifyNight() {
         int sickOdds = randGenerator.nextInt(20); //%5 chance of early death
         if (sickOdds == 2) {
-            currentState = PlantState.Sick;
-        } else if (currentState.equals(PlantState.Sick)) {
-            currentState = PlantState.Dead;
+            currentState.setState(state.Sick);
+        } else if (currentState.getState().equals(state.Sick)) {
+            currentState.advanceState();
         }
     }
 

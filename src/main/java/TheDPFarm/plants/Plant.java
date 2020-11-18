@@ -7,6 +7,7 @@ public interface Plant extends DayAndNightObserver {
 
     public PlantState getState();
     public void setState(PlantState newState);
-
+    
     public String getType();
+
 }
