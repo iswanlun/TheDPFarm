@@ -7,6 +7,8 @@ public class FarmLevelTwo extends FarmLevelOne {
     public FarmLevelTwo(FarmLevelOne farm) {
         this.farm = farm;
     }
+    
+    protected FarmLevelTwo() {} //Needed for implicit constructor of level three
 
 
     
