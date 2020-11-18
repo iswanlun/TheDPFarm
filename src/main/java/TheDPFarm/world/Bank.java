@@ -3,6 +3,7 @@ package TheDPFarm.world;
 import java.util.ArrayList;
 
 public class Bank {
+    
     static class WorldBank {
 
         private ArrayList<BankAccount> _accounts = new ArrayList<>();
