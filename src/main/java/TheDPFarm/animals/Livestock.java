@@ -2,6 +2,8 @@
 
 package TheDPFarm.animals;
 
+import TheDPFarm.util.HarvestListener;
+
 public interface Livestock extends Animal {
 
     public int getBatchSize();
@@ -12,4 +14,6 @@ public interface Livestock extends Animal {
     public void setHarvestPrivcePerBatch(double harvestPrice);
     public double getSlaughterPricePerBatch();
     public void setSlaughterPricePerBatch(double slaughterPrice);
+
+    public void addHarvestListener(HarvestListener listener);
 }

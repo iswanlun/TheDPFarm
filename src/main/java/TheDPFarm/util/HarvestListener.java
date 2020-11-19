@@ -1,18 +1,18 @@
 package TheDPFarm.util;
 
+/**
+ * This harvest listener is added to every harvestable entity.
+ */
+
 public class HarvestListener {
 
-    private SimulationDialog worldDiaglog;
+    private SimulationDialog simDlg;
 
-    public HarvestListener(SimulationDialog worldDiaglog) {
-        this.worldDiaglog = worldDiaglog;
+    public HarvestListener(SimulationDialog simDlg) {
+        this.simDlg = simDlg;
     }
 
     public void harvestEvent(HarvestEvent e) {
-        /**
-         * TODO: When a harves event occurs, parse the event and
-         * trigger the corrent dialog for the event.
-         */
+        simDlg.harvestMsg(e.getAssetType(), e.getAcreId(), e.getFarmId());
     }
-    
 }

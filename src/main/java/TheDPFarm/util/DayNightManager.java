@@ -18,7 +18,7 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
     
     public DayNightManager() {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(this, 60000, 60000);
+        timer.scheduleAtFixedRate(this, 20000, 20000);
     }
 
     public void run() {
