@@ -4,10 +4,11 @@ public class BankAccount {
     
     private int FarmId;
     private double balance;
+    private final double defaultBalance = 5000.0;
 
-    public BankAccount(int id, double startingBalance) {
+    public BankAccount(int id) {
         this.FarmId = id;
-        this.balance = startingBalance;
+        this.balance = defaultBalance;
     }
 
     public int getFarmId() {
@@ -21,6 +22,10 @@ public class BankAccount {
 
     public double makeWithdrawl(double amount) {
         balance -= amount;
+        return balance;
+    }
+
+    public double getBalance() {
         return balance;
     }
 

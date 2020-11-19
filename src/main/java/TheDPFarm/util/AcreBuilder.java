@@ -1,13 +1,15 @@
 package TheDPFarm.util;
 
+import TheDPFarm.levels.Acre;
+import TheDPFarm.levels.Acre.AssetType;
+
 /**
- * This is used for planting crops, configures a acre of 
- * crops so that all that is needed is a simple call to this
- * classes concrete factory children.
+ * This is used for planting crops, configures a acre of crops so that all that
+ * is needed is a simple call to this classes concrete factory children.
  */
 public abstract class AcreBuilder {
 
-    public void getAcre() {
+    public void buildAcre(Acre acre, AssetType aType) {
         chargeBank();
         createAssets();
         insertAssets();
@@ -15,11 +17,19 @@ public abstract class AcreBuilder {
         registerWithHarvest();
     }
 
-    public abstract void chargeBank();
-    public abstract void createAssets();
-    public abstract void insertAssets();
-    public abstract void registerWithDayNight();
-    public abstract void registerWithHarvest();
+    public void createAcre(int acres, double price) {
+        chargeBankAcre(acres, price);
+        createAcres(acres);
+    }
+
+    protected abstract void chargeBank();
+    protected abstract void createAssets();
+    protected abstract void insertAssets();
+    protected abstract void registerWithDayNight();
+    protected abstract void registerWithHarvest();
+
+    protected abstract void chargeBankAcre(int acres, double price);
+    protected abstract void createAcres(int acres);
 
     /**
      * To construct an acre

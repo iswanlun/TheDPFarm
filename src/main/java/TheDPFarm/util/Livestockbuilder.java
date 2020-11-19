@@ -2,23 +2,48 @@ package TheDPFarm.util;
 
 public class Livestockbuilder extends AcreBuilder {
 
-    public void chargeBank() {
+    private HarvestListener hListener;
+    private CollectionListener cListener;
+
+    public Livestockbuilder(HarvestListener h, CollectionListener c) {
+        this.hListener = h;
+        this.cListener = c;
+    }
+
+    @Override
+    protected void chargeBank() {
 
     }
     
-    public void createAssets() {
+    @Override
+    protected void createAssets() {
 
     }
 
-    public void insertAssets() {
+    @Override
+    protected void insertAssets() {
 
     }
 
-    public void registerWithDayNight() {
+    @Override
+    protected void registerWithDayNight() {
 
     }
 
-    public void registerWithHarvest() {
+    @Override
+    protected void registerWithHarvest() {
+
+    }
+
+    @Override
+    protected void chargeBankAcre(int acres, double price) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    protected void createAcres(int acres) {
+        // TODO Auto-generated method stub
 
     }
     

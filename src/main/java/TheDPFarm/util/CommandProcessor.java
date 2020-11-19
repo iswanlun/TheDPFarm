@@ -8,7 +8,7 @@ public class CommandProcessor {
 
     public CommandProcessor() {
         dlg = new SimulationDialog();
-        mngr = new FarmManger();
+        mngr = new FarmManger(dlg);
         dnMngr = new DayNightManager();
         dlg.welcome();
     }

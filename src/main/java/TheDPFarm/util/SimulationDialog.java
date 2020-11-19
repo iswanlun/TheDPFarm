@@ -32,5 +32,25 @@ public class SimulationDialog {
 
     public void collectMsg(String assetType, int acreId, int farmId) {
         System.out.println(assetType + " on acre " + acreId + " of farm number " + farmId + " can be collected.");
-	}
+    }
+    
+    public void purchaseMade(double balance) {
+        System.out.println("Purchase made, current balance : " + balance);
+    }
+
+    public void insufficientFunds(double price) {
+        System.out.println("You have insufficient funds to make a purchase of : " + price);
+    }
+
+    public void saleMade(double balance) {
+        System.out.println("Sale made, current balance : " + balance);
+    }
+
+    public void insufficientAmount(int amount) {
+        System.out.println("You do not have enough to sell : " + amount);
+    }
+
+    public void insufficientLand(int amount) {
+        System.out.println("You do not have acres to add : " + amount);
+    }
 }

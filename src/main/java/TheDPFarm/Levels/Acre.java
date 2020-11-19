@@ -14,18 +14,30 @@ public class Acre {
     public enum UsageType {
         EMPTY, CROPS, LIVESTOCK
     }
+    public enum AssetType {
+        EMPTY, CORN, MUSHROOMS, SOYBEANS, WHEAT, CHICKEN, COW, HOG, SHEEP
+    }
 
     private Livestock livestock;
     private Crops crop;
 
-    private UsageType type = UsageType.EMPTY;
+    private UsageType utype = UsageType.EMPTY;
+    private AssetType atype = AssetType.EMPTY;
 
     public Acre(UsageType type) {
-        this.type = type;
+        this.utype = type;
+    }
+
+    public UsageType getUsageType() {
+        return utype;
+    }
+
+    public AssetType getAssetType() {
+        return atype;
     }
 
     public boolean plantCrop(Crops crop) {
-        if(type.equals(UsageType.CROPS)) {
+        if(utype.equals(UsageType.CROPS)) {
             this.crop = crop;
             return true;
         }
@@ -33,7 +45,7 @@ public class Acre {
     }
 
     public boolean raiseLivestock(Livestock livestock) {
-        if(type.equals(UsageType.LIVESTOCK)) {
+        if(utype.equals(UsageType.LIVESTOCK)) {
             this.livestock = livestock;
             return true;
         }
@@ -43,12 +55,12 @@ public class Acre {
     public void renewAcre() {
         livestock = null;
         crop = null;
-        type = UsageType.EMPTY;
+        utype = UsageType.EMPTY;
     }
 
     public void reuseAcre(UsageType type) {
         renewAcre();
-        this.type = type;
+        this.utype = type;
     }
 
     public Crops getCrop() {
