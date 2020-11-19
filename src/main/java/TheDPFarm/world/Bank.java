@@ -4,25 +4,22 @@ import java.util.ArrayList;
 
 public class Bank {
     
-    static class WorldBank {
+    private static ArrayList<BankAccount> _accounts = new ArrayList<>();
 
-        private ArrayList<BankAccount> _accounts = new ArrayList<>();
+    public static void addAccount(BankAccount newAccount) {
+        _accounts.add(newAccount);
+    }
 
-        public void addAccount(BankAccount newAccount) {
-            _accounts.add(newAccount);
-        }
+    public static void removeAccount(BankAccount oldAccount) {
+        _accounts.remove(oldAccount);
+    }
 
-        public void removeAccount(BankAccount oldAccount) {
-            _accounts.remove(oldAccount);
-        }
-
-        public BankAccount findAccount(int id) {
-            for (BankAccount a : _accounts) {
-                if(a.getFarmId() == id) {
-                    return a;
-                }
+    public static BankAccount findAccount(int id) {
+        for (BankAccount a : _accounts) {
+            if(a.getFarmId() == id) {
+                return a;
             }
-            return null;
         }
+        return null;
     }
 }
