@@ -1,6 +1,6 @@
-package TheDPFarm.plants;
+package thedpfarm.plants;
 
-import TheDPFarm.util.Acre.AssetType;
+import thedpfarm.util.Acre.AssetType;
 
 public class Wheat extends Crops {
 

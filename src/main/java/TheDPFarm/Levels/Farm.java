@@ -1,9 +1,10 @@
-package TheDPFarm.levels;
+package thedpfarm.levels;
 
 import java.util.Vector;
-import TheDPFarm.util.Acre;
-import TheDPFarm.util.SimulationDialog;
-import TheDPFarm.util.Acre.AssetType;
+
+import thedpfarm.util.Acre;
+import thedpfarm.util.SimulationDialog;
+import thedpfarm.util.Acre.AssetType;
 
 public interface Farm {
 

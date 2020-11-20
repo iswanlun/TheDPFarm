@@ -1,6 +1,6 @@
 
 
-package TheDPFarm.animals;
+package thedpfarm.animals;
 
 public class AnimalState {
 

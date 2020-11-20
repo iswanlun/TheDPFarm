@@ -1,11 +1,11 @@
-package TheDPFarm.world;
+package thedpfarm.world;
 
 import java.util.ArrayList;
 
-import TheDPFarm.levels.Farm;
-import TheDPFarm.levels.FarmLevelThree;
-import TheDPFarm.levels.FarmLevelTwo;
-import TheDPFarm.util.DayNightManager;
+import thedpfarm.levels.Farm;
+import thedpfarm.levels.FarmLevelThree;
+import thedpfarm.levels.FarmLevelTwo;
+import thedpfarm.util.DayNightManager;
 
 public class World {
 

@@ -1,14 +1,14 @@
-package TheDPFarm.animals;
+package thedpfarm.animals;
 
 import java.util.Random;
 
-import TheDPFarm.animals.AnimalState.State;
-import TheDPFarm.util.CollectionEvent;
-import TheDPFarm.util.CollectionListener;
-import TheDPFarm.util.HarvestEvent;
-import TheDPFarm.util.HarvestListener;
-import TheDPFarm.util.Acre.AssetType;
-import TheDPFarm.world.World;
+import thedpfarm.animals.AnimalState.State;
+import thedpfarm.util.CollectionEvent;
+import thedpfarm.util.CollectionListener;
+import thedpfarm.util.HarvestEvent;
+import thedpfarm.util.HarvestListener;
+import thedpfarm.util.Acre.AssetType;
+import thedpfarm.world.World;
 
 public abstract class Livestock implements Animal {
 

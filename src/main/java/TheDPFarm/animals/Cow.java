@@ -1,7 +1,7 @@
-package TheDPFarm.animals;
+package thedpfarm.animals;
 
-import TheDPFarm.animals.AnimalState.State;
-import TheDPFarm.util.Acre.AssetType;
+import thedpfarm.animals.AnimalState.State;
+import thedpfarm.util.Acre.AssetType;
 
 public class Cow extends Livestock {
     

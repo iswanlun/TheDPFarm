@@ -1,4 +1,4 @@
-package TheDPFarm.world;
+package thedpfarm.world;
 
 import java.util.ArrayList;
 

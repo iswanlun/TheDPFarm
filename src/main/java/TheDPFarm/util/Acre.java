@@ -1,10 +1,10 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
-import TheDPFarm.plants.Crops;
-import TheDPFarm.world.Bank;
-import TheDPFarm.world.World;
-import TheDPFarm.animals.Livestock;
-import TheDPFarm.animals.AnimalState.State;
+import thedpfarm.animals.Livestock;
+import thedpfarm.animals.AnimalState.State;
+import thedpfarm.plants.Crops;
+import thedpfarm.world.Bank;
+import thedpfarm.world.World;
 
 /**
  * This holds farm assets for each acre and protects the integrety of the game

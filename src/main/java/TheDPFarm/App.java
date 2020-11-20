@@ -6,11 +6,11 @@
  * ???
  * refrence: http://www.blackwasp.co.uk/GofPatterns.aspx
  */
-package TheDPFarm;
+package thedpfarm;
 
 import java.util.Scanner;
 
-import TheDPFarm.util.CommandProcessor;
+import thedpfarm.util.CommandProcessor;
 
 public class App {
     public static void main(String[] args) {

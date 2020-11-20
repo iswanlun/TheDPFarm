@@ -1,10 +1,10 @@
-package TheDPFarm.world;
+package thedpfarm.world;
 
 public class BankAccount {
     
     private int FarmId;
     private double balance;
-    private final double defaultBalance = 300000.0;
+    private static final double defaultBalance = 300000.0;
 
     public BankAccount(int id) {
         this.FarmId = id;

@@ -1,4 +1,4 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
 public interface DayAndNightObserver {
     public void notifyDay();

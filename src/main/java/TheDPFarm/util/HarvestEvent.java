@@ -1,6 +1,6 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
-import TheDPFarm.util.Acre.AssetType;
+import thedpfarm.util.Acre.AssetType;
 
 public class HarvestEvent {
 

@@ -1,8 +1,8 @@
 
-package TheDPFarm.animals;
+package thedpfarm.animals;
 
-import TheDPFarm.animals.AnimalState.State;
-import TheDPFarm.util.DayAndNightObserver;
+import thedpfarm.animals.AnimalState.State;
+import thedpfarm.util.DayAndNightObserver;
 
 public interface Animal extends DayAndNightObserver {
 

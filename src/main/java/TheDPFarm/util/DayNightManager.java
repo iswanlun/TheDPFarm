@@ -1,4 +1,4 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
 import java.util.ArrayList;
 import java.util.Timer;

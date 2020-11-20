@@ -1,4 +1,4 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
 /**
  * This harvest listener is added to every harvestable entity.

@@ -1,6 +1,6 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
-import TheDPFarm.util.Acre.AssetType;
+import thedpfarm.util.Acre.AssetType;
 
 /**
  * This is used for planting crops, configures a acre of crops so that all that

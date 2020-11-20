@@ -1,7 +1,8 @@
-package TheDPFarm.levels;
+package thedpfarm.levels;
 
 import java.util.ArrayList;
-import TheDPFarm.util.Acre;
+
+import thedpfarm.util.Acre;
 
 public class FarmLevelTwo extends FarmLevelOne {
 

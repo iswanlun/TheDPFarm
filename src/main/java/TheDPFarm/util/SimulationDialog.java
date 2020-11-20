@@ -1,11 +1,11 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
-import TheDPFarm.animals.AnimalState;
-import TheDPFarm.plants.PlantState.State;
-import TheDPFarm.util.Acre.AssetType;
-import TheDPFarm.util.Acre.UsageType;
-import TheDPFarm.world.Bank;
-import TheDPFarm.world.World;
+import thedpfarm.animals.AnimalState;
+import thedpfarm.plants.PlantState.State;
+import thedpfarm.util.Acre.AssetType;
+import thedpfarm.util.Acre.UsageType;
+import thedpfarm.world.Bank;
+import thedpfarm.world.World;
 
 /**
  * This class contains the dialog methods for printing to the console.
@@ -88,16 +88,16 @@ public class SimulationDialog {
     }
 
     public void cropAudit(int num, UsageType uType, AssetType aType, State state) {
-        System.out.printf("%20d %20s %20s %20s\n", num, uType.toString(), aType.toString(), state.toString());
+        System.out.printf("%20d %20s %20s %20s%n", num, uType.toString(), aType.toString(), state.toString());
         System.out.flush();
     }
 
     public void livestockAudit(int num, UsageType uType, AssetType aType, AnimalState.State state) {
-        System.out.printf("%20d %20s %20s %20s\n", num, uType.toString(), aType.toString(), state.toString());
+        System.out.printf("%20d %20s %20s %20s%n", num, uType.toString(), aType.toString(), state.toString());
     }
 
     public void auditTable() {
-        System.out.printf("%20s %20s %20s %20s\n", "#", "Usage Type", "Asset Type", "State");
+        System.out.printf("%20s %20s %20s %20s%n", "#", "Usage Type", "Asset Type", "State");
         System.out.flush();
     }
 

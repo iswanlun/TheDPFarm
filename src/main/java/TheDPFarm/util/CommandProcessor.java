@@ -1,15 +1,15 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
-import TheDPFarm.world.World;
+import thedpfarm.world.World;
 
 public class CommandProcessor {
 
     SimulationDialog dlg;
-    FarmManger mngr;
+    FarmManager mngr;
 
     public CommandProcessor() {
         dlg = new SimulationDialog();
-        mngr = new FarmManger(dlg);
+        mngr = new FarmManager(dlg);
         dlg.welcome();
     }
 

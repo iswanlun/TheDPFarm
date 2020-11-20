@@ -1,9 +1,9 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
-import TheDPFarm.util.Acre.AssetType;
-import TheDPFarm.plants.*;
-import TheDPFarm.plants.PlantState.State;
-import TheDPFarm.world.*;
+import thedpfarm.plants.*;
+import thedpfarm.plants.PlantState.State;
+import thedpfarm.util.Acre.AssetType;
+import thedpfarm.world.*;
 
 public class CropBuilder extends AcreBuilder {
 

@@ -1,9 +1,9 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
-import TheDPFarm.util.Acre.AssetType;
-import TheDPFarm.util.Acre.UsageType;
-import TheDPFarm.world.Bank;
-import TheDPFarm.world.World;
+import thedpfarm.util.Acre.AssetType;
+import thedpfarm.util.Acre.UsageType;
+import thedpfarm.world.Bank;
+import thedpfarm.world.World;
 
 public class AcreDirector {
 

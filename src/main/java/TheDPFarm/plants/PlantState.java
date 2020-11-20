@@ -1,4 +1,4 @@
-package TheDPFarm.plants;
+package thedpfarm.plants;
 
 public class PlantState {
 

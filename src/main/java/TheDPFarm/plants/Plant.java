@@ -1,9 +1,9 @@
 
-package TheDPFarm.plants;
+package thedpfarm.plants;
 
-import TheDPFarm.plants.PlantState.State;
-import TheDPFarm.util.DayAndNightObserver;
-import TheDPFarm.util.Acre.AssetType;
+import thedpfarm.plants.PlantState.State;
+import thedpfarm.util.DayAndNightObserver;
+import thedpfarm.util.Acre.AssetType;
 
 public interface Plant extends DayAndNightObserver {
 

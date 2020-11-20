@@ -1,13 +1,13 @@
-package TheDPFarm.plants;
+package thedpfarm.plants;
 
 import java.util.Random;
 
-import TheDPFarm.util.Acre;
-import TheDPFarm.util.HarvestEvent;
-import TheDPFarm.util.HarvestListener;
-import TheDPFarm.util.Acre.AssetType;
-import TheDPFarm.world.World;
-import TheDPFarm.plants.PlantState.State;
+import thedpfarm.plants.PlantState.State;
+import thedpfarm.util.Acre;
+import thedpfarm.util.HarvestEvent;
+import thedpfarm.util.HarvestListener;
+import thedpfarm.util.Acre.AssetType;
+import thedpfarm.world.World;
 
 public abstract class Crops implements Plant {
 

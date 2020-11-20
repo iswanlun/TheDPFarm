@@ -1,14 +1,14 @@
-package TheDPFarm.levels;
+package thedpfarm.levels;
 
 import java.util.ArrayList;
 import java.util.Vector;
 
-import TheDPFarm.util.Acre.UsageType;
-import TheDPFarm.util.Acre.AssetType;
-import TheDPFarm.animals.AnimalState;
-import TheDPFarm.plants.PlantState.State;
-import TheDPFarm.util.Acre;
-import TheDPFarm.util.SimulationDialog;
+import thedpfarm.animals.AnimalState;
+import thedpfarm.plants.PlantState.State;
+import thedpfarm.util.Acre;
+import thedpfarm.util.SimulationDialog;
+import thedpfarm.util.Acre.AssetType;
+import thedpfarm.util.Acre.UsageType;
 
 public class FarmLevelOne implements Farm {
 

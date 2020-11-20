@@ -1,9 +1,9 @@
-package TheDPFarm.util;
+package thedpfarm.util;
 
-import TheDPFarm.util.Acre.AssetType;
-import TheDPFarm.world.Bank;
-import TheDPFarm.world.World;
-import TheDPFarm.animals.*;
+import thedpfarm.animals.*;
+import thedpfarm.util.Acre.AssetType;
+import thedpfarm.world.Bank;
+import thedpfarm.world.World;
 
 public class Livestockbuilder extends AcreBuilder {
 
