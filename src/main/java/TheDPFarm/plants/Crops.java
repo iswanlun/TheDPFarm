@@ -27,8 +27,8 @@ public abstract class Crops implements Plant {
         return currentState.getState();
     }
 
-    public void setState(PlantState newState) {
-        this.currentState = newState;
+    public void setState(State state) {
+        this.currentState.setState(state);
     }
 
     public AssetType getType() {
@@ -45,21 +45,27 @@ public abstract class Crops implements Plant {
 
         if (age < 3) {
             currentState.advanceState();
-        } else if (age == harvestAge) {
+        } else if (age == harvestAge && getState().equals(State.HEALTHY)) {
             currentState.advanceState();
             HarvestEvent e = new HarvestEvent(type, farmId);
             hListener.harvestEvent(e);
         } else if ((age - harvestAge) > 3) {
             currentState.advanceState();
+        } else if ((age - harvestAge) > 6) {
+            
         }
     }
 
     public void notifyNight() {
-        int sickOdds = randGenerator.nextInt(20); // %5 chance of early death
+        int sickOdds = randGenerator.nextInt(40); // %5 chance of early death
         if (sickOdds == 2) {
-            currentState.setState(State.SICK);
+            setState(State.SICK);
         } else if (currentState.getState().equals(State.SICK)) {
             currentState.advanceState();
+        }
+        int weedOdds = randGenerator.nextInt(40); // %5 chance of getting weeds
+        if (weedOdds == 2) {
+            setState(State.WEEDINFESTED);
         }
     }
 

@@ -8,16 +8,16 @@ import TheDPFarm.util.Acre.AssetType;
  */
 public abstract class AcreBuilder {
 
-    protected abstract void chargeBank(AssetType aType) throws FinanceException;
     protected abstract void createAssets(AssetType aType);
+    protected abstract void chargeBank(AssetType aType) throws FinanceException;
     protected abstract void registerWithDayNight();
     protected abstract void registerWithHarvest();
     protected abstract void registerWithCollect();
     protected abstract void insertAssets(Acre acre);
 
     public void buildAcre(Acre acre, AssetType aType) throws FinanceException {
-        chargeBank(aType);
         createAssets(aType);
+        chargeBank(aType);
         registerWithDayNight();
         registerWithHarvest();
         registerWithCollect();

@@ -8,7 +8,7 @@ import TheDPFarm.util.Acre.AssetType;
 public interface Plant extends DayAndNightObserver {
 
     public State getState();
-    public void setState(PlantState newState);
+    public void setState(State state);
     public AssetType getType();
 
 }

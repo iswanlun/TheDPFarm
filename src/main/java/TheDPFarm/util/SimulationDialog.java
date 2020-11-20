@@ -1,5 +1,12 @@
 package TheDPFarm.util;
 
+import TheDPFarm.animals.AnimalState;
+import TheDPFarm.plants.PlantState.State;
+import TheDPFarm.util.Acre.AssetType;
+import TheDPFarm.util.Acre.UsageType;
+import TheDPFarm.world.Bank;
+import TheDPFarm.world.World;
+
 /**
  * This class contains the dialog methods for printing to the console.
  * All println's are contained here, with a few exceptions.
@@ -61,4 +68,46 @@ public class SimulationDialog {
     public void insufficientLand(int amount) {
         System.out.println("You do not have acres to add : " + amount);
     }
+
+    public void badParameter(String param) {
+        System.out.println("The paramater : " + param + " is invalid.");
+    }
+
+    public void statusMessage() {
+        System.out.println("----- Farm Status -----------------------------");
+        System.out.println(" Farm Id :  " + (World.getFarm().getFarmId() + 1));
+        System.out.println(" Farm level :  " + World.getFarm().getLevel());
+        System.out.println(" Farm size in acres :  " + World.getFarm().size());
+        if (World.TimeManager.getTime()) {
+            System.out.println(" Time of day :  Day");
+        } else {
+            System.out.println(" Time of day :  Night");
+        }
+        System.out.println(" Number of empty acres :  " + World.getFarm().getEmptyAcres().size());
+        System.out.println(" Number of acres with crops :  " + World.getFarm().numCropsAcres());
+        System.out.println(" Number of acres with livestock :  " + World.getFarm().numLivestockAcres());
+        System.out.println(" Account balance for this farm :  " + Bank.accountBalance(World.getFarm().getFarmId()));
+        System.out.println("-----------------------------------------------");
+    }
+
+    public void cropAudit(int num, UsageType uType, AssetType aType, State state) {
+        System.out.printf("%20d %20s %20s %20s\n", num, uType.toString(), aType.toString(), state.toString());
+    }
+
+    public void livestockAudit(int num, UsageType uType, AssetType aType, AnimalState.State state) {
+        System.out.printf("%20d %20s %20s %20s\n", num, uType.toString(), aType.toString(), state.toString());
+    }
+
+    public void auditTable() {
+        System.out.printf("%20s %20s %20s %20s\n", "#", "Usage Type", "Asset Type", "State");
+    }
+
+    public void removeWeedsCost() {
+        System.out.println(" Cost to remove all weeds :  " + World.getFarm().weedCost());
+    }
+
+    public void weedsRemoved() {
+        System.out.println("Weeds removed.");
+    }
+
 }

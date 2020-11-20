@@ -5,7 +5,7 @@ import TheDPFarm.util.Acre;
 
 public class FarmLevelTwo extends FarmLevelOne {
 
-    private double taxRateTwo = 16.4;
+    private double taxRateTwo = 1.164;
 
     public FarmLevelTwo(FarmLevelOne farm) {
         super(farm.getFarmId(), farm.getAllAcres());
@@ -15,8 +15,13 @@ public class FarmLevelTwo extends FarmLevelOne {
         super(id, acres);
     } 
 
+    @Override
     public double getTaxRate() {
         return taxRateTwo;
     }
-    
+
+    @Override
+    public int getLevel() {
+        return 2;
+    }
 }

@@ -21,35 +21,37 @@ public class Acre {
     private Livestock livestock;
     private Crops crop;
 
-    private UsageType utype = UsageType.EMPTY;
-    private AssetType atype = AssetType.EMPTY;
+    private UsageType uType = UsageType.EMPTY;
+    private AssetType aType = AssetType.EMPTY;
 
     public Acre(UsageType type) {
-        this.utype = type;
+        this.uType = type;
     }
 
     public UsageType getUsageType() {
-        return utype;
+        return uType;
     }
 
     public AssetType getAssetType() {
-        return atype;
+        return aType;
     }
 
     public void plantCrop(Crops crop) {
         this.crop = crop;
-        this.utype = UsageType.CROPS;
+        aType = crop.getType();
+        this.uType = UsageType.CROPS;
     }
 
     public void raiseLivestock(Livestock livestock) {
         this.livestock = livestock;
-        this.utype = UsageType.LIVESTOCK;
+        aType = livestock.getType();
+        this.uType = UsageType.LIVESTOCK;
     }
 
     public void renewAcre() {
         livestock = null;
         crop = null;
-        utype = UsageType.EMPTY;
+        uType = UsageType.EMPTY;
     }
 
     public Crops getCrop() {
@@ -62,13 +64,23 @@ public class Acre {
 
     public void harvest(SimulationDialog dlg) {
         double profit = 0;
-        if(utype.equals(UsageType.CROPS)) {
+        if(uType.equals(UsageType.CROPS)) {
             profit += crop.getHarvestNetAmountPerAcre();
-        } else if (utype.equals(UsageType.LIVESTOCK)) {
+        } else if (uType.equals(UsageType.LIVESTOCK)) {
             profit += livestock.getHarvestPricePerBatch() * livestock.getBatchesPerAcre();
         }
         double bal = Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(profit);
         renewAcre();
         dlg.harvestSold(bal);
+    }
+
+    public void collect(SimulationDialog dlg) {
+        double profit = 0;
+        if (uType.equals(UsageType.LIVESTOCK)) {
+            profit += livestock.getCollectPricePerBatch() * livestock.getBatchesPerAcre();
+        }
+        double bal = Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(profit);
+        renewAcre();
+        dlg.collectSold(bal);
     }
 }

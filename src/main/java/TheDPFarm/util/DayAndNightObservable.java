@@ -8,4 +8,5 @@ public interface DayAndNightObservable {
     public void notifyDayEvent();
     public void notifyNightEvent();
 
+    public boolean getTime();
 }

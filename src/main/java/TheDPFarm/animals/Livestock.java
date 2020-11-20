@@ -11,7 +11,7 @@ import TheDPFarm.util.Acre.AssetType;
 
 public abstract class Livestock implements Animal {
 
-    protected AnimalState currentState;
+    protected State currentState;
 
     protected int batchSize;
     protected int batchPrice;
@@ -66,11 +66,15 @@ public abstract class Livestock implements Animal {
     }
 
     public State getState() {
-        return currentState.getState();
+        return currentState;
     }
 
     public void setState(State newState) {
-        currentState.setState(newState);
+        currentState = newState;
+    }
+
+    public AssetType getType() {
+        return type;
     }
 
     public void notifyDay() {
@@ -90,16 +94,16 @@ public abstract class Livestock implements Animal {
     }
 
     public void notifyNight() {
-        int sickOdds = randGenerator.nextInt(20); // %5 chance of early death
+        int sickOdds = randGenerator.nextInt(50); // %5 chance of early death
         if (sickOdds == 2) {
-            currentState.setState(State.SICK);
+            setState(State.SICK);
         } else if (getState().equals(State.SICK)) {
             setState(State.DEAD);
         }
 
-        int predatorOdds = randGenerator.nextInt(20); // %5 chance of early death
+        int predatorOdds = randGenerator.nextInt(50); // %5 chance of early death
         if (predatorOdds == 2) {
-            currentState.setState(State.EATEN);
+            setState(State.EATEN);
         }
     }
 

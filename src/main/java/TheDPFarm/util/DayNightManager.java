@@ -18,11 +18,12 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
     
     public DayNightManager() {
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(this, 20000, 20000);
+        timer.scheduleAtFixedRate(this, 2000, 2000);
+        //timer.scheduleAtFixedRate(this, 20000, 20000);
     }
 
     public void run() {
-        System.out.println("[DEBUG] : Day night switch occured.");
+        //System.out.println("[DEBUG] : Day night switch occured.");
         if(cyclePosition) {
             notifyNightEvent();
         } else {
@@ -54,4 +55,10 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
             o.notifyNight();
         }
     }
+
+    @Override
+    public boolean getTime() {
+        return cyclePosition;
+    }
+
 }

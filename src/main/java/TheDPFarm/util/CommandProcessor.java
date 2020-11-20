@@ -48,7 +48,7 @@ public class CommandProcessor {
                 break;
             case "dogs": mngr.addDogs(args[2]);
                 break;
-            case "status": dlg.getStatus();
+            case "status": dlg.statusMessage();
                 break;
             case "switch": mngr.switchFarm(args[2]);
                 break;

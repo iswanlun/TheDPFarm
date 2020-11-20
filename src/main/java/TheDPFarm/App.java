@@ -19,13 +19,16 @@ public class App {
         CommandProcessor cmd = new CommandProcessor();
 
         while(true) {
-            String line = in.nextLine();
-            if(line.equalsIgnoreCase("q")) {
-                in.close();
-                break;
+            String line;
+            if(in.hasNextLine()) {
+                line = in.nextLine();
+                if(line.equalsIgnoreCase("q")) {
+                    in.close();
+                    break;
+                }
+                cmd.process(line);
+                line = null;
             }
-            cmd.process(line);
-            line = null;
         }
     }
 }
