@@ -53,12 +53,12 @@ public class Livestockbuilder extends AcreBuilder {
 
     private Livestock getLivestockObject(AssetType type) {
         switch (type) {
-            case CHICKEN: return new Chicken();
-            case COW: return new Cow();
-            case SHEEP: return new Sheep();
-            case HOG: return new Hog(); 
+            case CHICKEN: return new Chicken(AnimalState.state.HEALTHY, World.getFarm().getFarmId());
+            case COW: return new Cow(AnimalState.state.HEALTHY, World.getFarm().getFarmId());
+            case SHEEP: return new Sheep(AnimalState.state.HEALTHY, World.getFarm().getFarmId());
+            case HOG: return new Hog(AnimalState.state.HEALTHY, World.getFarm().getFarmId());
             default:
-                throw new IllegalArgumentException("Invalid type found.");
+                return null;
         }
     }
     

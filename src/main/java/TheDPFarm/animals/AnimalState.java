@@ -7,7 +7,7 @@ public class AnimalState {
     private state currentState;
 
     public enum state {
-        Healthy, Sick, HarvestReady, SlaughterReady
+        HEALTHY, COLLECTREADY, HARVESTREADY, SICK, DEAD, EATEN
     }
     
     public state getState() {
@@ -17,4 +17,5 @@ public class AnimalState {
     public void setState(state newState) {
         currentState = newState;
     }
+
 }

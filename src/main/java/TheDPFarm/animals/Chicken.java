@@ -1,71 +1,22 @@
 package TheDPFarm.animals;
 
-public class Chicken implements Livestock {
+import TheDPFarm.animals.AnimalState.state;
+import TheDPFarm.util.Acre.AssetType;
 
-    private AnimalState currentState;
-    private int batchSize = 50;
-    private int batchPrice = 100;
-    private int batchDensity = 60;
+public class Chicken extends Livestock {
 
-    private double batchHarvestPrice;
-    private double batchSlaughterPrice;
-
-
-    @Override
-    public AnimalState getState() {
-        return currentState;
-    }
-
-    @Override
-    public void setState(AnimalState newState) {
-        this.currentState = newState;
-    }
-
-    @Override
-    public int getBatchSize() {
-        return batchSize;
-    }
-
-    @Override
-    public int getBatchPrice() {
-        return batchPrice;
-    }
-
-    @Override
-    public int getBatchesPerAcre() {
-        return batchDensity;
-    }
-
-    @Override
-    public double getHarvestPrivcePerBatch() {
-        return batchHarvestPrice;
-    }
-
-    @Override
-    public void setHarvestPrivcePerBatch(double harvestPrice) {
-        this.batchHarvestPrice = harvestPrice;
-    }
-
-    @Override
-    public double getSlaughterPricePerBatch() {
-        return batchSlaughterPrice;
-    }
-
-    @Override
-    public void setSlaughterPricePerBatch(double slaughterPrice) {
-        this.batchSlaughterPrice = slaughterPrice;
-
-    }
-
-    @Override
-    public void notifyDay() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void notifyNight() {
-        // TODO Auto-generated method stub
-
+    public Chicken(state state, int farmId) {
+        batchSize = 50;
+        batchPrice = 100;
+        batchDensity = 60;
+        harvestAge = 14;
+        
+        type = AssetType.CHICKEN;
+        age = 0;
+        collectableToggle = 0;
+        setState(state);
+        startRand();
+        setCollectPricePerBatch(25);
+        this.farmId = farmId;
     }
 }
