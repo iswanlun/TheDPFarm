@@ -13,15 +13,9 @@ import java.util.Scanner;
 import TheDPFarm.util.CommandProcessor;
 
 public class App {
-
-    public String getGreeting() {
-        return "A humble farmer, tending to my code...";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
 
-        Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in, "UTF-8");
         CommandProcessor cmd = new CommandProcessor();
 
         while(true) {
@@ -31,6 +25,7 @@ public class App {
                 break;
             }
             cmd.process(line);
+            line = null;
         }
     }
 }

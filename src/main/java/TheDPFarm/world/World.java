@@ -8,7 +8,7 @@ import TheDPFarm.util.DayNightManager;
 public class World {
 
     private static ArrayList<Farm> farmList = new ArrayList<>();
-    public static DayNightManager TimeManager = new DayNightManager();
+    public final static DayNightManager TimeManager = new DayNightManager();
     private static Farm currentFarm;
 
     public static void addFarm(Farm newFarm) {

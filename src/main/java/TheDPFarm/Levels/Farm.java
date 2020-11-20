@@ -2,6 +2,7 @@ package TheDPFarm.levels;
 
 import java.util.Vector;
 import TheDPFarm.util.Acre;
+import TheDPFarm.util.Acre.AssetType;
 
 public interface Farm {
 
@@ -20,4 +21,8 @@ public interface Farm {
     public double getTaxRate();
 
     public Vector<Acre> getEmptyAcres();
+
+    public Vector<Acre> getHarvestAcres(AssetType type);
+
+    public Vector<Acre> getCollectAcres(AssetType type);
 }

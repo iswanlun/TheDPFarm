@@ -2,18 +2,16 @@ package TheDPFarm.util;
 
 import TheDPFarm.util.Acre.AssetType;
 import TheDPFarm.plants.*;
-import TheDPFarm.plants.PlantState.state;
+import TheDPFarm.plants.PlantState.State;
 import TheDPFarm.world.*;
 
 public class CropBuilder extends AcreBuilder {
 
     private HarvestListener hListener;
-    private CollectionListener cListener;
     private Crops crops;
 
-    public CropBuilder(HarvestListener h, CollectionListener c) {
+    public CropBuilder(HarvestListener h) {
         this.hListener = h;
-        this.cListener = c;
     }
 
     @Override
@@ -53,10 +51,10 @@ public class CropBuilder extends AcreBuilder {
 
     private Crops getCropsObject(AssetType type) {
         switch (type) {
-            case CORN: return new Corn(new PlantState(state.SEED), World.getFarm().getFarmId());
-            case SOYBEANS: return new Soybeans(new PlantState(state.SEED), World.getFarm().getFarmId());
-            case WHEAT: return new Wheat(new PlantState(state.SEED), World.getFarm().getFarmId());
-            case MUSHROOMS: return new Mushrooms(new PlantState(state.SEED), World.getFarm().getFarmId()); 
+            case CORN: return new Corn(new PlantState(State.SEED), World.getFarm().getFarmId());
+            case SOYBEANS: return new Soybeans(new PlantState(State.SEED), World.getFarm().getFarmId());
+            case WHEAT: return new Wheat(new PlantState(State.SEED), World.getFarm().getFarmId());
+            case MUSHROOMS: return new Mushrooms(new PlantState(State.SEED), World.getFarm().getFarmId()); 
             default:
                 return null;
         }

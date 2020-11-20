@@ -1,6 +1,8 @@
 package TheDPFarm.util;
 
 import TheDPFarm.plants.Crops;
+import TheDPFarm.world.Bank;
+import TheDPFarm.world.World;
 import TheDPFarm.animals.Livestock;
 
 /**
@@ -50,16 +52,23 @@ public class Acre {
         utype = UsageType.EMPTY;
     }
 
-    public void reuseAcre(UsageType type) {
-        renewAcre();
-        this.utype = type;
-    }
-
     public Crops getCrop() {
         return crop;
     }
 
     public Livestock getLivestock() {
         return livestock;
+    }
+
+    public void harvest(SimulationDialog dlg) {
+        double profit = 0;
+        if(utype.equals(UsageType.CROPS)) {
+            profit += crop.getHarvestNetAmountPerAcre();
+        } else if (utype.equals(UsageType.LIVESTOCK)) {
+            profit += livestock.getHarvestPricePerBatch() * livestock.getBatchesPerAcre();
+        }
+        double bal = Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(profit);
+        renewAcre();
+        dlg.harvestSold(bal);
     }
 }

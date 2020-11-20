@@ -2,43 +2,43 @@ package TheDPFarm.plants;
 
 public class PlantState {
 
-    private state currentState;
+    private State currentState;
 
-    public enum state {
+    public enum State {
         SEED, SEEDLING, HEALTHY, HARVESTREADY, SICK, DEAD, WEEDINFESTED
     }
 
-    public PlantState(state startState) {
+    public PlantState(State startState) {
         currentState = startState;
     }
 
-    public state getState() {
+    public State getState() {
         return currentState;
     }
 
-    public void setState(state newState) {
+    public void setState(State newState) {
         this.currentState = newState;
     }
 
     public void advanceState() {
         switch (currentState) {
             case HEALTHY: 
-                currentState = state.HARVESTREADY;
+                currentState = State.HARVESTREADY;
                 break;
             case SICK:
-                currentState = state.DEAD;
+                currentState = State.DEAD;
                 break;
             case SEED:
-                currentState = state.SEEDLING;
+                currentState = State.SEEDLING;
                 break;
             case SEEDLING:
-                currentState = state.HEALTHY;
+                currentState = State.HEALTHY;
                 break;
             case HARVESTREADY:
-                currentState = state.DEAD;
+                currentState = State.DEAD;
                 break;
             case WEEDINFESTED:
-                currentState = state.DEAD;
+                currentState = State.DEAD;
                 break;
             default:
                 break;

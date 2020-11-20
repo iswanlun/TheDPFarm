@@ -98,7 +98,11 @@ public class FarmManger {
 		}
 	}
 
-	public void harvestCrops(String string) {
+	public void harvestAcres(String string) {
+		AssetType type = stringToEnumConverter(string);
+		for (Acre a : World.getFarm().getHarvestAcres(type)) {
+			a.harvest(dlg);
+		}
 	}
 
 	public void removeWeeds() {
@@ -127,9 +131,6 @@ public class FarmManger {
 		} else {
 			dlg.insufficientLand(amt);
 		}
-	}
-
-	public void harvestLivestock(String string) {
 	}
 
 	public void collectProducts(String string) {

@@ -11,7 +11,7 @@ public class AcreDirector {
     private AcreBuilder livestockBuilder;
 
     public AcreDirector(HarvestListener h, CollectionListener c) {
-        cropBuilder = new CropBuilder(h, c);
+        cropBuilder = new CropBuilder(h);
         livestockBuilder = new Livestockbuilder(h, c);
     }
 

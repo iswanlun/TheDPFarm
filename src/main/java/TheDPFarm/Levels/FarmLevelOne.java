@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import TheDPFarm.util.Acre.UsageType;
+import TheDPFarm.util.Acre.AssetType;
+import TheDPFarm.animals.AnimalState;
+import TheDPFarm.plants.PlantState.State;
 import TheDPFarm.util.Acre;
 
 public class FarmLevelOne implements Farm {
@@ -66,5 +69,34 @@ public class FarmLevelOne implements Farm {
     
     protected ArrayList<Acre> getAllAcres() {
         return acres;
+    }
+
+    public Vector<Acre> getHarvestAcres(AssetType type) {
+        Vector<Acre> harvestAcres = new Vector<>();
+        for (Acre a : acres) {
+            if(a.getAssetType().equals(type)) {
+                if (a.getUsageType().equals(UsageType.CROPS) &&
+                    a.getCrop().getState().equals(State.HARVESTREADY)) {
+                        harvestAcres.add(a);             
+                } else if (a.getUsageType().equals(UsageType.LIVESTOCK) &&
+                    a.getLivestock().getState().equals(AnimalState.State.HARVESTREADY)) {
+                        harvestAcres.add(a);
+                }
+            }
+        }
+        return harvestAcres;
+    }
+
+    public Vector<Acre> getCollectAcres(AssetType type) {
+        Vector<Acre> collectAcres = new Vector<>();
+        for (Acre a : acres) {
+            if(a.getAssetType().equals(type)) {
+                if (a.getUsageType().equals(UsageType.LIVESTOCK) &&
+                    a.getLivestock().getState().equals(AnimalState.State.COLLECTREADY)) {
+                        collectAcres.add(a);
+                }
+            }
+        }
+        return collectAcres;
     }
 }

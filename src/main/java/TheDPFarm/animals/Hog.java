@@ -1,11 +1,11 @@
 package TheDPFarm.animals;
 
-import TheDPFarm.animals.AnimalState.state;
+import TheDPFarm.animals.AnimalState.State;
 import TheDPFarm.util.Acre.AssetType;
 
 public class Hog extends Livestock {
 
-    public Hog(state state, int farmId) {
+    public Hog(State state, int farmId) {
         batchSize = 10;
         batchPrice = 120;
         batchDensity = 30;

@@ -2,7 +2,7 @@ package TheDPFarm.animals;
 
 import java.util.Random;
 
-import TheDPFarm.animals.AnimalState.state;
+import TheDPFarm.animals.AnimalState.State;
 import TheDPFarm.util.CollectionEvent;
 import TheDPFarm.util.CollectionListener;
 import TheDPFarm.util.HarvestEvent;
@@ -65,41 +65,41 @@ public abstract class Livestock implements Animal {
         this.cListener = listener;
     }
 
-    public state getState() {
+    public State getState() {
         return currentState.getState();
     }
 
-    public void setState(state newState) {
+    public void setState(State newState) {
         currentState.setState(newState);
     }
 
     public void notifyDay() {
         this.age++;
         collectableToggle = (collectableToggle+1)%3;
-        if(collectableToggle == 0 && !getState().equals(state.DEAD)) {
+        if(collectableToggle == 0 && !getState().equals(State.DEAD)) {
             CollectionEvent e = new CollectionEvent(type, farmId);
             cListener.collectionEvent(e);
         }
         if (age == harvestAge) {
-            setState(state.HARVESTREADY);
+            setState(State.HARVESTREADY);
             HarvestEvent e = new HarvestEvent(type, farmId);
             hListener.harvestEvent(e);
         } else if (age - harvestAge > 3) {
-            setState(state.DEAD);
+            setState(State.DEAD);
         }
     }
 
     public void notifyNight() {
         int sickOdds = randGenerator.nextInt(20); // %5 chance of early death
         if (sickOdds == 2) {
-            currentState.setState(state.SICK);
-        } else if (getState().equals(state.SICK)) {
-            setState(state.DEAD);
+            currentState.setState(State.SICK);
+        } else if (getState().equals(State.SICK)) {
+            setState(State.DEAD);
         }
 
         int predatorOdds = randGenerator.nextInt(20); // %5 chance of early death
         if (predatorOdds == 2) {
-            currentState.setState(state.EATEN);
+            currentState.setState(State.EATEN);
         }
     }
 

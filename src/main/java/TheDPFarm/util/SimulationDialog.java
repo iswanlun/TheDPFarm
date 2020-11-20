@@ -46,6 +46,14 @@ public class SimulationDialog {
         System.out.println("Sale made, current balance : " + balance);
     }
 
+    public void harvestSold(double balance) {
+        System.out.println("Harvest sold, current balance : " + balance);
+    }
+
+    public void collectSold(double balance) {
+        System.out.println("Collection sold, current balance : " + balance);
+    }
+
     public void insufficientAmount(int amount) {
         System.out.println("You do not have enough to sell : " + amount);
     }

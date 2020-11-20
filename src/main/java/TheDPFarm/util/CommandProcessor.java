@@ -4,17 +4,15 @@ public class CommandProcessor {
 
     SimulationDialog dlg;
     FarmManger mngr;
-    DayNightManager dnMngr;
 
     public CommandProcessor() {
         dlg = new SimulationDialog();
         mngr = new FarmManger(dlg);
-        dnMngr = new DayNightManager();
         dlg.welcome();
     }
 
     public void process(String line) {
-        line.toLowerCase();
+        line = line.toLowerCase();
         String[] tokens = line.split(" ");
         switch(tokens[0]) {
             case "f": farmProcessor(tokens);
@@ -73,7 +71,7 @@ public class CommandProcessor {
                 break;
             case "plant": mngr.plant(args[2], args[3]);
                 break;
-            case "harvest": mngr.harvestCrops(args[2]);
+            case "harvest": mngr.harvestAcres(args[2]);
                 break;
             case "remove": mngr.removeWeeds();
                 break;
@@ -95,7 +93,7 @@ public class CommandProcessor {
                 break;
             case "raise": mngr.raise(args[2], args[3]);
                 break;
-            case "harvest": mngr.harvestLivestock(args[2]);
+            case "harvest": mngr.harvestAcres(args[2]);
                 break;
             case "collect": mngr.collectProducts(args[2]);
                 break;
