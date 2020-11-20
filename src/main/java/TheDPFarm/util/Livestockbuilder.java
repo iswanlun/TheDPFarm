@@ -7,13 +7,11 @@ import TheDPFarm.animals.*;
 
 public class Livestockbuilder extends AcreBuilder {
 
-    private HarvestListener hListener;
-    private CollectionListener cListener;
+    private SimulationDialog dlg;
     private Livestock livestock;
 
-    public Livestockbuilder(HarvestListener h, CollectionListener c) {
-        this.hListener = h;
-        this.cListener = c;
+    public Livestockbuilder(SimulationDialog dlg) {
+        this.dlg = dlg;
     }
 
     @Override
@@ -38,12 +36,14 @@ public class Livestockbuilder extends AcreBuilder {
 
     @Override
     protected void registerWithHarvest() {
-        livestock.addHarvestListener(hListener);
+        HarvestListener h = new HarvestListener(dlg);
+        livestock.addHarvestListener(h);
     }
 
     @Override
     protected void registerWithCollect() {
-        livestock.addCollectionListener(cListener);
+        CollectionListener c = new CollectionListener(dlg);
+        livestock.addCollectionListener(c);
     }
 
     @Override

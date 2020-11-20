@@ -89,6 +89,7 @@ public class FarmLevelOne implements Farm {
     }
 
     public Vector<Acre> getCollectAcres(AssetType type) {
+        System.out.println("[DEBUG] Collect acres.");
         Vector<Acre> collectAcres = new Vector<>();
         for (Acre a : acres) {
             if (a.getAssetType().equals(type)) {
@@ -98,6 +99,7 @@ public class FarmLevelOne implements Farm {
                 }
             }
         }
+        System.out.println("[DEBUG] vector size : " + collectAcres.size());
         return collectAcres;
     }
 
@@ -125,6 +127,9 @@ public class FarmLevelOne implements Farm {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.CROPS)) {
                 dlg.cropAudit(acres.indexOf(a)+1, a.getUsageType(), a.getAssetType(), a.getCrop().getState());
+                if(a.getCrop().getState().equals(State.DEAD)) {
+                    a.renewAcre();
+                }
             }
         }
     }
@@ -133,6 +138,10 @@ public class FarmLevelOne implements Farm {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.LIVESTOCK)) {
                 dlg.livestockAudit(acres.indexOf(a)+1, a.getUsageType(), a.getAssetType(), a.getLivestock().getState());
+                if(a.getLivestock().getState().equals(AnimalState.State.DEAD) ||
+                    a.getLivestock().getState().equals(AnimalState.State.EATEN)) {
+                    a.renewAcre();
+                }
             }
         }
     }

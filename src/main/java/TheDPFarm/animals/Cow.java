@@ -17,6 +17,7 @@ public class Cow extends Livestock {
         setState(state);
         startRand();
         setCollectPricePerBatch(150);
+        setHarvestPricePerBatch(1000);
         this.farmId = farmId;
     }
 }

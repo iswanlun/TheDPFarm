@@ -17,6 +17,7 @@ public class Chicken extends Livestock {
         setState(state);
         startRand();
         setCollectPricePerBatch(25);
+        setHarvestPricePerBatch(200);
         this.farmId = farmId;
     }
 }

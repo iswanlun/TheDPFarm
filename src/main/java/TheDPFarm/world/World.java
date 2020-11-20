@@ -3,6 +3,8 @@ package TheDPFarm.world;
 import java.util.ArrayList;
 
 import TheDPFarm.levels.Farm;
+import TheDPFarm.levels.FarmLevelThree;
+import TheDPFarm.levels.FarmLevelTwo;
 import TheDPFarm.util.DayNightManager;
 
 public class World {
@@ -47,5 +49,20 @@ public class World {
 
     public static ArrayList<Farm> getFarmList() {
         return farmList;
+    }
+
+    public static void upgradeFarm() {
+        switch (currentFarm.getLevel()) {
+            case 1: if (Bank.accountBalance(currentFarm.getFarmId()) > 400000) {
+                        currentFarm = new FarmLevelTwo(currentFarm);
+                    }
+                    break;
+            case 2: if (Bank.accountBalance(currentFarm.getFarmId()) > 500000) {
+                        currentFarm = new FarmLevelThree(currentFarm);
+                    }
+                    break;
+            default:
+                break;
+        }
     }
 }

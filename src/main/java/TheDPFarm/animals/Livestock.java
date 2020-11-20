@@ -8,6 +8,7 @@ import TheDPFarm.util.CollectionListener;
 import TheDPFarm.util.HarvestEvent;
 import TheDPFarm.util.HarvestListener;
 import TheDPFarm.util.Acre.AssetType;
+import TheDPFarm.world.World;
 
 public abstract class Livestock implements Animal {
 
@@ -80,11 +81,13 @@ public abstract class Livestock implements Animal {
     public void notifyDay() {
         this.age++;
         collectableToggle = (collectableToggle+1)%3;
-        if(collectableToggle == 0 && !getState().equals(State.DEAD)) {
+        if(collectableToggle == 0 && !getState().equals(State.DEAD) &&
+            !getState().equals(State.EATEN)) {
+            setState(State.COLLECTREADY);
             CollectionEvent e = new CollectionEvent(type, farmId);
             cListener.collectionEvent(e);
         }
-        if (age == harvestAge) {
+        if (age == harvestAge && !getState().equals(State.DEAD)) {
             setState(State.HARVESTREADY);
             HarvestEvent e = new HarvestEvent(type, farmId);
             hListener.harvestEvent(e);
@@ -94,14 +97,14 @@ public abstract class Livestock implements Animal {
     }
 
     public void notifyNight() {
-        int sickOdds = randGenerator.nextInt(50); // %5 chance of early death
+        int sickOdds = randGenerator.nextInt(50);
         if (sickOdds == 2) {
             setState(State.SICK);
         } else if (getState().equals(State.SICK)) {
             setState(State.DEAD);
         }
 
-        int predatorOdds = randGenerator.nextInt(50); // %5 chance of early death
+        int predatorOdds = randGenerator.nextInt(50);
         if (predatorOdds == 2) {
             setState(State.EATEN);
         }
@@ -109,5 +112,15 @@ public abstract class Livestock implements Animal {
 
     protected void startRand() {
         randGenerator = new Random();
+    }
+
+    public void purge() {
+
+        World.TimeManager.acquire();
+        World.TimeManager.removeObserver(this);
+        World.TimeManager.release();
+
+        this.hListener = null;
+        this.cListener = null;
     }
 }

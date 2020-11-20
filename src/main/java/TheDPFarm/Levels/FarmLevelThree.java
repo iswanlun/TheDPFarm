@@ -4,8 +4,8 @@ public class FarmLevelThree extends FarmLevelTwo {
     
     private double taxRateThree = 1.1875;
 
-    public FarmLevelThree(FarmLevelTwo farm) {
-        super(farm.getFarmId(), farm.getAllAcres());
+    public FarmLevelThree(Farm farm) {
+        super(farm.getFarmId(), ((FarmLevelTwo) farm).getAllAcres());
     }
 
     @Override

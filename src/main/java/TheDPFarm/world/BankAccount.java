@@ -4,7 +4,7 @@ public class BankAccount {
     
     private int FarmId;
     private double balance;
-    private final double defaultBalance = 5000.0;
+    private final double defaultBalance = 300000.0;
 
     public BankAccount(int id) {
         this.FarmId = id;
@@ -28,5 +28,4 @@ public class BankAccount {
     public double getBalance() {
         return balance;
     }
-
 }

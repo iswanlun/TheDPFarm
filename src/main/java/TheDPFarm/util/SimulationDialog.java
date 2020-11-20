@@ -13,10 +13,6 @@ import TheDPFarm.world.World;
  */
 public class SimulationDialog {
 
-	public void getStatus() {
-        // TODO get the status of the whole farm
-	}
-
 	public void help() {
         System.out.println("Refer to the documentation in Doc.md.");
 	}
@@ -88,10 +84,12 @@ public class SimulationDialog {
         System.out.println(" Number of acres with livestock :  " + World.getFarm().numLivestockAcres());
         System.out.println(" Account balance for this farm :  " + Bank.accountBalance(World.getFarm().getFarmId()));
         System.out.println("-----------------------------------------------");
+        System.out.flush();
     }
 
     public void cropAudit(int num, UsageType uType, AssetType aType, State state) {
         System.out.printf("%20d %20s %20s %20s\n", num, uType.toString(), aType.toString(), state.toString());
+        System.out.flush();
     }
 
     public void livestockAudit(int num, UsageType uType, AssetType aType, AnimalState.State state) {
@@ -100,6 +98,7 @@ public class SimulationDialog {
 
     public void auditTable() {
         System.out.printf("%20s %20s %20s %20s\n", "#", "Usage Type", "Asset Type", "State");
+        System.out.flush();
     }
 
     public void removeWeedsCost() {
@@ -108,6 +107,14 @@ public class SimulationDialog {
 
     public void weedsRemoved() {
         System.out.println("Weeds removed.");
+    }
+
+    public void tooFewArguments() {
+        System.out.println("Too few arguments provided.");
+    }
+    
+    public void badArgumentType() {
+        System.out.println("The arguments provided are malformed.");
     }
 
 }

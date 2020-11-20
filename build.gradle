@@ -39,9 +39,13 @@ application {
     mainClassName = 'TheDPFarm.App'
 }
 
+run {
+    standardInput = System.in
+}
+
 //Jacoco 
 apply plugin: 'jacoco'
-
+apply plugin: 'application'
 
 // Configure Checkstyle
 apply plugin: 'checkstyle'

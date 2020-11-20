@@ -3,6 +3,7 @@ package TheDPFarm.util;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
@@ -15,6 +16,8 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
     private ArrayList<DayAndNightObserver> observers = new ArrayList<>();
 
     private boolean cyclePosition = true; //true is day and false is night
+
+    private ReentrantLock mutex = new ReentrantLock();
     
     public DayNightManager() {
         Timer timer = new Timer();
@@ -24,14 +27,19 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
 
     public void run() {
         //System.out.println("[DEBUG] : Day night switch occured.");
-        if(cyclePosition) {
-            notifyNightEvent();
-        } else {
-            notifyDayEvent();
+        try {
+            mutex.lock();
+            if(cyclePosition) {
+                notifyNightEvent();
+            } else {
+                notifyDayEvent();
+            }
+            cyclePosition = !cyclePosition;
+        } finally {
+            mutex.unlock();
         }
-        cyclePosition = !cyclePosition;
     }
-    
+
     @Override
     public void addObserver(DayAndNightObserver newObserver) {
         observers.add(newObserver);
@@ -61,4 +69,12 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
         return cyclePosition;
     }
 
+    public void acquire() {
+        mutex.lock();
+    }
+
+    public void release() {
+        mutex.unlock();
+    }
+    
 }

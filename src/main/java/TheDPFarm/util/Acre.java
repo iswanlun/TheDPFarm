@@ -4,6 +4,7 @@ import TheDPFarm.plants.Crops;
 import TheDPFarm.world.Bank;
 import TheDPFarm.world.World;
 import TheDPFarm.animals.Livestock;
+import TheDPFarm.animals.AnimalState.State;
 
 /**
  * This holds farm assets for each acre and protects the integrety of the game
@@ -18,8 +19,8 @@ public class Acre {
         EMPTY, CORN, MUSHROOMS, SOYBEANS, WHEAT, CHICKEN, COW, HOG, SHEEP
     }
 
-    private Livestock livestock;
-    private Crops crop;
+    private Livestock livestock = null;
+    private Crops crop = null;
 
     private UsageType uType = UsageType.EMPTY;
     private AssetType aType = AssetType.EMPTY;
@@ -49,9 +50,15 @@ public class Acre {
     }
 
     public void renewAcre() {
-        livestock = null;
-        crop = null;
+        if (livestock != null) {
+            livestock.purge();
+            livestock = null;
+        } else if (crop != null) {
+            crop.purge();
+            crop = null;
+        }
         uType = UsageType.EMPTY;
+        aType = AssetType.EMPTY;
     }
 
     public Crops getCrop() {
@@ -75,12 +82,13 @@ public class Acre {
     }
 
     public void collect(SimulationDialog dlg) {
+        System.out.println("[DEBUG] Collect.");
         double profit = 0;
         if (uType.equals(UsageType.LIVESTOCK)) {
-            profit += livestock.getCollectPricePerBatch() * livestock.getBatchesPerAcre();
+            profit += (livestock.getCollectPricePerBatch() * livestock.getBatchesPerAcre());
+            livestock.setState(State.HEALTHY);
         }
         double bal = Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(profit);
-        renewAcre();
         dlg.collectSold(bal);
     }
 }

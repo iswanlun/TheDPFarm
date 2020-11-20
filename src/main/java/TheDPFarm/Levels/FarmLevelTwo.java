@@ -7,8 +7,8 @@ public class FarmLevelTwo extends FarmLevelOne {
 
     private double taxRateTwo = 1.164;
 
-    public FarmLevelTwo(FarmLevelOne farm) {
-        super(farm.getFarmId(), farm.getAllAcres());
+    public FarmLevelTwo(Farm farm) {
+        super(farm.getFarmId(), ((FarmLevelOne) farm).getAllAcres());
     }
     
     protected FarmLevelTwo(int id, ArrayList<Acre> acres) {

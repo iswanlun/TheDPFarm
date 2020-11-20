@@ -24,15 +24,11 @@ public class FarmManger {
 
 	private SimulationDialog dlg;
 	private AcreDirector acreDir;
-	private HarvestListener harvestListener;
-	private CollectionListener collectionListener;
 
 
 	public FarmManger(SimulationDialog dlg) {
 		this.dlg = dlg;
-		harvestListener = new HarvestListener(dlg);
-		collectionListener = new CollectionListener(dlg);
-		this.acreDir = new AcreDirector(harvestListener, collectionListener);
+		this.acreDir = new AcreDirector(dlg);
 	}
 
 	public void sellAcres(String string) {
@@ -136,7 +132,8 @@ public class FarmManger {
 
 	public void collectProducts(String string) {
 		AssetType type = stringToEnumConverter(string);
-		for (Acre a : World.getFarm().getCollectAcres(type)) {
+		Vector<Acre> vec = World.getFarm().getCollectAcres(type);
+		for (Acre a : vec) {
 			a.collect(dlg);
 		}
 	}

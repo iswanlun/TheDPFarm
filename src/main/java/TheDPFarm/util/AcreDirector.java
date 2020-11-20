@@ -10,9 +10,9 @@ public class AcreDirector {
     private AcreBuilder cropBuilder;
     private AcreBuilder livestockBuilder;
 
-    public AcreDirector(HarvestListener h, CollectionListener c) {
-        cropBuilder = new CropBuilder(h);
-        livestockBuilder = new Livestockbuilder(h, c);
+    public AcreDirector(SimulationDialog dlg) {
+        cropBuilder = new CropBuilder(dlg);
+        livestockBuilder = new Livestockbuilder(dlg);
     }
 
     public void constructCropAcre(Acre acre, AssetType aType) {

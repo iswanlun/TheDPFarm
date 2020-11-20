@@ -6,6 +6,7 @@ import TheDPFarm.util.Acre;
 import TheDPFarm.util.HarvestEvent;
 import TheDPFarm.util.HarvestListener;
 import TheDPFarm.util.Acre.AssetType;
+import TheDPFarm.world.World;
 import TheDPFarm.plants.PlantState.State;
 
 public abstract class Crops implements Plant {
@@ -51,8 +52,6 @@ public abstract class Crops implements Plant {
             hListener.harvestEvent(e);
         } else if ((age - harvestAge) > 3) {
             currentState.advanceState();
-        } else if ((age - harvestAge) > 6) {
-            
         }
     }
 
@@ -83,5 +82,14 @@ public abstract class Crops implements Plant {
     
     public void addHarvestListener(HarvestListener listener) {
         this.hListener = listener;
+    }
+
+    public void purge() {
+
+        World.TimeManager.acquire();
+        World.TimeManager.removeObserver(this);
+        World.TimeManager.release();
+        
+        this.hListener = null;
     }
 }

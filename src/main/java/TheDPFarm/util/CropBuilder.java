@@ -7,11 +7,11 @@ import TheDPFarm.world.*;
 
 public class CropBuilder extends AcreBuilder {
 
-    private HarvestListener hListener;
+    private SimulationDialog dlg;
     private Crops crops;
 
-    public CropBuilder(HarvestListener h) {
-        this.hListener = h;
+    public CropBuilder(SimulationDialog dlg) {
+        this.dlg = dlg;
     }
 
     @Override
@@ -36,7 +36,8 @@ public class CropBuilder extends AcreBuilder {
 
     @Override
     protected void registerWithHarvest() {
-        crops.addHarvestListener(hListener);
+        HarvestListener h = new HarvestListener(dlg);
+        crops.addHarvestListener(h);
     }
 
     @Override
