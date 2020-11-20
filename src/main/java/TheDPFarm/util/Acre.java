@@ -1,20 +1,21 @@
 package thedpfarm.util;
 
-import thedpfarm.animals.Livestock;
 import thedpfarm.animals.AnimalState.State;
+import thedpfarm.animals.Livestock;
 import thedpfarm.plants.Crops;
 import thedpfarm.world.Bank;
 import thedpfarm.world.World;
 
 /**
  * This holds farm assets for each acre and protects the integrety of the game
- * by enforcing density constraints for each asset
+ * by enforcing density constraints for each asset.
  */
 public class Acre {
 
     public enum UsageType {
         EMPTY, CROPS, LIVESTOCK
     }
+
     public enum AssetType {
         EMPTY, CORN, MUSHROOMS, SOYBEANS, WHEAT, CHICKEN, COW, HOG, SHEEP
     }
@@ -22,31 +23,31 @@ public class Acre {
     private Livestock livestock = null;
     private Crops crop = null;
 
-    private UsageType uType = UsageType.EMPTY;
-    private AssetType aType = AssetType.EMPTY;
+    private UsageType usageType = UsageType.EMPTY;
+    private AssetType assetType = AssetType.EMPTY;
 
     public Acre(UsageType type) {
-        this.uType = type;
+        this.usageType = type;
     }
 
     public UsageType getUsageType() {
-        return uType;
+        return usageType;
     }
 
     public AssetType getAssetType() {
-        return aType;
+        return assetType;
     }
 
     public void plantCrop(Crops crop) {
         this.crop = crop;
-        aType = crop.getType();
-        this.uType = UsageType.CROPS;
+        assetType = crop.getType();
+        this.usageType = UsageType.CROPS;
     }
 
     public void raiseLivestock(Livestock livestock) {
         this.livestock = livestock;
-        aType = livestock.getType();
-        this.uType = UsageType.LIVESTOCK;
+        assetType = livestock.getType();
+        this.usageType = UsageType.LIVESTOCK;
     }
 
     public void renewAcre() {
@@ -57,8 +58,8 @@ public class Acre {
             crop.purge();
             crop = null;
         }
-        uType = UsageType.EMPTY;
-        aType = AssetType.EMPTY;
+        usageType = UsageType.EMPTY;
+        assetType = AssetType.EMPTY;
     }
 
     public Crops getCrop() {
@@ -71,9 +72,9 @@ public class Acre {
 
     public void harvest(SimulationDialog dlg) {
         double profit = 0;
-        if(uType.equals(UsageType.CROPS)) {
+        if (usageType.equals(UsageType.CROPS)) {
             profit += crop.getHarvestNetAmountPerAcre();
-        } else if (uType.equals(UsageType.LIVESTOCK)) {
+        } else if (usageType.equals(UsageType.LIVESTOCK)) {
             profit += livestock.getHarvestPricePerBatch() * livestock.getBatchesPerAcre();
         }
         double bal = Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(profit);
@@ -84,7 +85,7 @@ public class Acre {
     public void collect(SimulationDialog dlg) {
         System.out.println("[DEBUG] Collect.");
         double profit = 0;
-        if (uType.equals(UsageType.LIVESTOCK)) {
+        if (usageType.equals(UsageType.LIVESTOCK)) {
             profit += (livestock.getCollectPricePerBatch() * livestock.getBatchesPerAcre());
             livestock.setState(State.HEALTHY);
         }

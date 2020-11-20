@@ -3,11 +3,11 @@ package thedpfarm.animals;
 import java.util.Random;
 
 import thedpfarm.animals.AnimalState.State;
+import thedpfarm.util.Acre.AssetType;
 import thedpfarm.util.CollectionEvent;
 import thedpfarm.util.CollectionListener;
 import thedpfarm.util.HarvestEvent;
 import thedpfarm.util.HarvestListener;
-import thedpfarm.util.Acre.AssetType;
 import thedpfarm.world.World;
 
 public abstract class Livestock implements Animal {
@@ -26,8 +26,8 @@ public abstract class Livestock implements Animal {
     protected int farmId;
     protected int age;
 
-    protected HarvestListener hListener;
-    protected CollectionListener cListener;
+    protected HarvestListener harvestListener;
+    protected CollectionListener collectListener;
     protected Random randGenerator;
 
     public int getBatchSize() {
@@ -59,11 +59,11 @@ public abstract class Livestock implements Animal {
     }
 
     public void addHarvestListener(HarvestListener listener) {
-        this.hListener = listener;
+        this.harvestListener = listener;
     }
 
     public void addCollectionListener(CollectionListener listener) {
-        this.cListener = listener;
+        this.collectListener = listener;
     }
 
     public State getState() {
@@ -80,17 +80,17 @@ public abstract class Livestock implements Animal {
 
     public void notifyDay() {
         this.age++;
-        collectableToggle = (collectableToggle+1)%3;
-        if(collectableToggle == 0 && !getState().equals(State.DEAD) &&
-            !getState().equals(State.EATEN)) {
+        collectableToggle = (collectableToggle + 1) % 3;
+        if (collectableToggle == 0 && !getState().equals(State.DEAD) 
+            && !getState().equals(State.EATEN)) {
             setState(State.COLLECTREADY);
             CollectionEvent e = new CollectionEvent(type, farmId);
-            cListener.collectionEvent(e);
+            collectListener.collectionEvent(e);
         }
         if (age == harvestAge && !getState().equals(State.DEAD)) {
             setState(State.HARVESTREADY);
             HarvestEvent e = new HarvestEvent(type, farmId);
-            hListener.harvestEvent(e);
+            harvestListener.harvestEvent(e);
         } else if (age - harvestAge > 3) {
             setState(State.DEAD);
         }
@@ -120,7 +120,7 @@ public abstract class Livestock implements Animal {
         World.TimeManager.removeObserver(this);
         World.TimeManager.release();
 
-        this.hListener = null;
-        this.cListener = null;
+        this.harvestListener = null;
+        this.collectListener = null;
     }
 }

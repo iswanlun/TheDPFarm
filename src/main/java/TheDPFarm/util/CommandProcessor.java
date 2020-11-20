@@ -16,7 +16,7 @@ public class CommandProcessor {
     public void process(String line) {
         line = line.toLowerCase();
         String[] tokens = line.split(" ");
-        switch(tokens[0]) {
+        switch (tokens[0]) {
             case "f": farmProcessor(tokens);
                 break;
             case "c": cropProcessor(tokens);
@@ -29,20 +29,14 @@ public class CommandProcessor {
                 dlg.defaultMsg(tokens);
         }
     }
+
     /**
-     * Supported commands:
-     * sell <amount>
-     * buy <amount>
-     * fence <amount>
-     * dogs <amount>
-     * status
-     * switch <alt id number>
-     * new
+     * Processes farm commands.
      * @param args String array of arguments.
      */
     private void farmProcessor(String[] args) {
         try {
-            switch(args[1]) {
+            switch (args[1]) {
                 case "sell": mngr.sellAcres(args[2]);
                     break;
                 case "buy": mngr.buyAcres(args[2]);
@@ -66,17 +60,14 @@ public class CommandProcessor {
             dlg.badArgumentType();
         }
     }
+
     /**
-     * Supported commands:
-     * audit
-	 * plant <type> <amount (acres)>
-	 * harvest <type>
-	 * remove
+     * Processes crop commands.
      * @param args String array of arguments.
      */
     private void cropProcessor(String[] args) {
         try {
-            switch(args[1]) {
+            switch (args[1]) {
                 case "audit": mngr.auditCrops();
                     break;
                 case "plant": mngr.plant(args[2], args[3]);
@@ -95,16 +86,12 @@ public class CommandProcessor {
     }
 
     /**
-     * Supported commands:
-     * audit
-	 * raise <type> <amount (acres)>
-	 * harvest <type>
-	 * collect <type>
+     * Processes livestock commands.
      * @param args String array of arguments.
      */
     private void livestockProcessor(String[] args) {
         try {
-            switch(args[1]) {
+            switch (args[1]) {
                 case "audit": mngr.auditLivestock();
                     break;
                 case "raise": mngr.raise(args[2], args[3]);

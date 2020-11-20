@@ -13,13 +13,13 @@ import thedpfarm.world.World;
  */
 public class SimulationDialog {
 
-	public void help() {
+    public void help() {
         System.out.println("Refer to the documentation in Doc.md.");
-	}
+    }
 
-	public void welcome() {
+    public void welcome() {
         System.out.println("Welcome to TheDPFarm Simulator. Type 'help' for help.");
-	}
+    }
     
     public void defaultMsg(String[] args) {
         System.out.print("The command string : ");
@@ -29,7 +29,7 @@ public class SimulationDialog {
         System.out.println(" does not match any known parameter form.");
     }
 
-	public void harvestMsg(String assetType, int farmId) {
+    public void harvestMsg(String assetType, int farmId) {
         System.out.println(assetType + " on farm number " + farmId + " is ready for harvest.");
     }
 

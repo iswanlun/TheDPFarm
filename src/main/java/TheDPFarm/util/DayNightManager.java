@@ -29,7 +29,7 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
         //System.out.println("[DEBUG] : Day night switch occured.");
         try {
             mutex.lock();
-            if(cyclePosition) {
+            if (cyclePosition) {
                 notifyNightEvent();
             } else {
                 notifyDayEvent();

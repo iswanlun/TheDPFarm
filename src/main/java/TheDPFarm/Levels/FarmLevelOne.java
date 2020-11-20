@@ -6,9 +6,9 @@ import java.util.Vector;
 import thedpfarm.animals.AnimalState;
 import thedpfarm.plants.PlantState.State;
 import thedpfarm.util.Acre;
-import thedpfarm.util.SimulationDialog;
 import thedpfarm.util.Acre.AssetType;
 import thedpfarm.util.Acre.UsageType;
+import thedpfarm.util.SimulationDialog;
 
 public class FarmLevelOne implements Farm {
 
@@ -76,12 +76,12 @@ public class FarmLevelOne implements Farm {
         Vector<Acre> harvestAcres = new Vector<>();
         for (Acre a : acres) {
             if (a.getAssetType().equals(type)) {
-                if (a.getUsageType().equals(UsageType.CROPS) &&
-                    a.getCrop().getState().equals(State.HARVESTREADY)) {
-                        harvestAcres.add(a);             
-                } else if (a.getUsageType().equals(UsageType.LIVESTOCK) &&
-                    a.getLivestock().getState().equals(AnimalState.State.HARVESTREADY)) {
-                        harvestAcres.add(a);
+                if (a.getUsageType().equals(UsageType.CROPS)
+                    && a.getCrop().getState().equals(State.HARVESTREADY)) {
+                    harvestAcres.add(a);             
+                } else if (a.getUsageType().equals(UsageType.LIVESTOCK)
+                    && a.getLivestock().getState().equals(AnimalState.State.HARVESTREADY)) {
+                    harvestAcres.add(a);
                 }
             }
         }
@@ -93,9 +93,9 @@ public class FarmLevelOne implements Farm {
         Vector<Acre> collectAcres = new Vector<>();
         for (Acre a : acres) {
             if (a.getAssetType().equals(type)) {
-                if (a.getUsageType().equals(UsageType.LIVESTOCK) &&
-                    a.getLivestock().getState().equals(AnimalState.State.COLLECTREADY)) {
-                        collectAcres.add(a);
+                if (a.getUsageType().equals(UsageType.LIVESTOCK)
+                    && a.getLivestock().getState().equals(AnimalState.State.COLLECTREADY)) {
+                    collectAcres.add(a);
                 }
             }
         }
@@ -126,8 +126,8 @@ public class FarmLevelOne implements Farm {
     public void auditCrops(SimulationDialog dlg) {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.CROPS)) {
-                dlg.cropAudit(acres.indexOf(a)+1, a.getUsageType(), a.getAssetType(), a.getCrop().getState());
-                if(a.getCrop().getState().equals(State.DEAD)) {
+                dlg.cropAudit(acres.indexOf(a) + 1, a.getUsageType(), a.getAssetType(), a.getCrop().getState());
+                if (a.getCrop().getState().equals(State.DEAD)) {
                     a.renewAcre();
                 }
             }
@@ -137,9 +137,9 @@ public class FarmLevelOne implements Farm {
     public void auditLivestock(SimulationDialog dlg) {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.LIVESTOCK)) {
-                dlg.livestockAudit(acres.indexOf(a)+1, a.getUsageType(), a.getAssetType(), a.getLivestock().getState());
-                if(a.getLivestock().getState().equals(AnimalState.State.DEAD) ||
-                    a.getLivestock().getState().equals(AnimalState.State.EATEN)) {
+                dlg.livestockAudit(acres.indexOf(a) + 1, a.getUsageType(), a.getAssetType(), a.getLivestock().getState());
+                if (a.getLivestock().getState().equals(AnimalState.State.DEAD)
+                    || a.getLivestock().getState().equals(AnimalState.State.EATEN)) {
                     a.renewAcre();
                 }
             }
@@ -159,7 +159,7 @@ public class FarmLevelOne implements Farm {
                 }
             }
         }
-        return cost*getTaxRate();
+        return cost * getTaxRate();
     }
 
     public void removeWeeds() {

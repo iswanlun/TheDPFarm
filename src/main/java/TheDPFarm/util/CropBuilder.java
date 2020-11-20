@@ -1,9 +1,16 @@
 package thedpfarm.util;
 
-import thedpfarm.plants.*;
+import thedpfarm.plants.Corn;
+import thedpfarm.plants.Crops;
+import thedpfarm.plants.Mushrooms;
+import thedpfarm.plants.PlantState;
 import thedpfarm.plants.PlantState.State;
+import thedpfarm.plants.Soybeans;
+import thedpfarm.plants.Wheat;
 import thedpfarm.util.Acre.AssetType;
-import thedpfarm.world.*;
+import thedpfarm.world.Bank;
+import thedpfarm.world.World;
+
 
 public class CropBuilder extends AcreBuilder {
 
@@ -15,14 +22,14 @@ public class CropBuilder extends AcreBuilder {
     }
 
     @Override
-    protected void createAssets(AssetType aType) {
-        crops = getCropsObject(aType);
+    protected void createAssets(AssetType assetType) {
+        crops = getCropsObject(assetType);
     }
 
     @Override
-    protected void chargeBank(AssetType aType) throws FinanceException {
+    protected void chargeBank(AssetType assetType) throws FinanceException {
         double price = crops.getCostPerAcre() * World.getFarm().getTaxRate();
-        if(price < Bank.accountBalance(World.getFarm().getFarmId())) {
+        if (price < Bank.accountBalance(World.getFarm().getFarmId())) {
             Bank.findAccount(World.getFarm().getFarmId()).makeWithdrawl(price);
         } else {
             throw new FinanceException("Ran out of funds planting new crops.");
@@ -52,10 +59,14 @@ public class CropBuilder extends AcreBuilder {
 
     private Crops getCropsObject(AssetType type) {
         switch (type) {
-            case CORN: return new Corn(new PlantState(State.SEED), World.getFarm().getFarmId());
-            case SOYBEANS: return new Soybeans(new PlantState(State.SEED), World.getFarm().getFarmId());
-            case WHEAT: return new Wheat(new PlantState(State.SEED), World.getFarm().getFarmId());
-            case MUSHROOMS: return new Mushrooms(new PlantState(State.SEED), World.getFarm().getFarmId()); 
+            case CORN: return new Corn(new PlantState(State.SEED), 
+                World.getFarm().getFarmId());
+            case SOYBEANS: return new Soybeans(new PlantState(State.SEED), 
+                World.getFarm().getFarmId());
+            case WHEAT: return new Wheat(new PlantState(State.SEED), 
+                World.getFarm().getFarmId());
+            case MUSHROOMS: return new Mushrooms(new PlantState(State.SEED), 
+                World.getFarm().getFarmId()); 
             default:
                 return null;
         }

@@ -8,16 +8,21 @@ import thedpfarm.util.Acre.AssetType;
  */
 public abstract class AcreBuilder {
 
-    protected abstract void createAssets(AssetType aType);
-    protected abstract void chargeBank(AssetType aType) throws FinanceException;
+    protected abstract void createAssets(AssetType assetType);
+
+    protected abstract void chargeBank(AssetType assetType) throws FinanceException;
+
     protected abstract void registerWithDayNight();
+
     protected abstract void registerWithHarvest();
+
     protected abstract void registerWithCollect();
+    
     protected abstract void insertAssets(Acre acre);
 
-    public void buildAcre(Acre acre, AssetType aType) throws FinanceException {
-        createAssets(aType);
-        chargeBank(aType);
+    public void buildAcre(Acre acre, AssetType assetType) throws FinanceException {
+        createAssets(assetType);
+        chargeBank(assetType);
         registerWithDayNight();
         registerWithHarvest();
         registerWithCollect();

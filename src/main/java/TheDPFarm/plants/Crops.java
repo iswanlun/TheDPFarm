@@ -4,9 +4,9 @@ import java.util.Random;
 
 import thedpfarm.plants.PlantState.State;
 import thedpfarm.util.Acre;
+import thedpfarm.util.Acre.AssetType;
 import thedpfarm.util.HarvestEvent;
 import thedpfarm.util.HarvestListener;
-import thedpfarm.util.Acre.AssetType;
 import thedpfarm.world.World;
 
 public abstract class Crops implements Plant {
@@ -20,7 +20,7 @@ public abstract class Crops implements Plant {
     protected int age;
     protected int farmId;
     protected PlantState currentState;
-    protected HarvestListener hListener;
+    protected HarvestListener harvestListener;
 
     protected Random randGenerator;
     
@@ -49,7 +49,7 @@ public abstract class Crops implements Plant {
         } else if (age == harvestAge && getState().equals(State.HEALTHY)) {
             currentState.advanceState();
             HarvestEvent e = new HarvestEvent(type, farmId);
-            hListener.harvestEvent(e);
+            harvestListener.harvestEvent(e);
         } else if ((age - harvestAge) > 3) {
             currentState.advanceState();
         }
@@ -81,7 +81,7 @@ public abstract class Crops implements Plant {
     }
     
     public void addHarvestListener(HarvestListener listener) {
-        this.hListener = listener;
+        this.harvestListener = listener;
     }
 
     public void purge() {
@@ -90,6 +90,6 @@ public abstract class Crops implements Plant {
         World.TimeManager.removeObserver(this);
         World.TimeManager.release();
         
-        this.hListener = null;
+        this.harvestListener = null;
     }
 }

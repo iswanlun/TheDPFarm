@@ -15,17 +15,17 @@ public class AcreDirector {
         livestockBuilder = new Livestockbuilder(dlg);
     }
 
-    public void constructCropAcre(Acre acre, AssetType aType) {
+    public void constructCropAcre(Acre acre, AssetType assetType) {
         try {
-            cropBuilder.buildAcre(acre, aType);
+            cropBuilder.buildAcre(acre, assetType);
         } catch (FinanceException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void constructLivestockAcre(Acre acre, AssetType aType) {
+    public void constructLivestockAcre(Acre acre, AssetType assetType) {
         try {
-            livestockBuilder.buildAcre(acre, aType);
+            livestockBuilder.buildAcre(acre, assetType);
         } catch (FinanceException e) {
             System.out.println(e.getMessage());
         }
