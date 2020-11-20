@@ -16,7 +16,7 @@ public class Bank {
 
     public static BankAccount findAccount(int id) {
         for (BankAccount a : _accounts) {
-            if(a.getFarmId() == id) {
+            if (a.getFarmId() == id) {
                 return a;
             }
         }
@@ -25,7 +25,7 @@ public class Bank {
     
     public static double accountBalance(int id) {
         for (BankAccount a : _accounts) {
-            if(a.getFarmId() == id) {
+            if (a.getFarmId() == id) {
                 return a.getBalance();
             }
         }

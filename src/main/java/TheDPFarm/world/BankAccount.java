@@ -2,17 +2,17 @@ package thedpfarm.world;
 
 public class BankAccount {
     
-    private int FarmId;
+    private int farmId;
     private double balance;
     private static final double defaultBalance = 300000.0;
 
     public BankAccount(int id) {
-        this.FarmId = id;
+        this.farmId = id;
         this.balance = defaultBalance;
     }
 
     public int getFarmId() {
-        return FarmId;
+        return farmId;
     }
 
     public double makeDeposit(double amount) {

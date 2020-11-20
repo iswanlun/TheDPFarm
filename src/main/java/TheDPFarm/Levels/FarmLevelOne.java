@@ -126,7 +126,8 @@ public class FarmLevelOne implements Farm {
     public void auditCrops(SimulationDialog dlg) {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.CROPS)) {
-                dlg.cropAudit(acres.indexOf(a) + 1, a.getUsageType(), a.getAssetType(), a.getCrop().getState());
+                dlg.cropAudit(acres.indexOf(a) + 1, a.getUsageType(), 
+                    a.getAssetType(), a.getCrop().getState());
                 if (a.getCrop().getState().equals(State.DEAD)) {
                     a.renewAcre();
                 }
@@ -137,7 +138,8 @@ public class FarmLevelOne implements Farm {
     public void auditLivestock(SimulationDialog dlg) {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.LIVESTOCK)) {
-                dlg.livestockAudit(acres.indexOf(a) + 1, a.getUsageType(), a.getAssetType(), a.getLivestock().getState());
+                dlg.livestockAudit(acres.indexOf(a) + 1, a.getUsageType(), 
+                    a.getAssetType(), a.getLivestock().getState());
                 if (a.getLivestock().getState().equals(AnimalState.State.DEAD)
                     || a.getLivestock().getState().equals(AnimalState.State.EATEN)) {
                     a.renewAcre();

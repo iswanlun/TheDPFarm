@@ -1,5 +1,6 @@
 package thedpfarm.util;
 
+import java.util.Vector;
 import thedpfarm.animals.AnimalState.State;
 import thedpfarm.animals.Chicken;
 import thedpfarm.animals.Cow;
@@ -11,9 +12,9 @@ import thedpfarm.plants.Mushrooms;
 import thedpfarm.plants.Soybeans;
 import thedpfarm.plants.Wheat;
 import thedpfarm.util.Acre.AssetType;
-import java.util.Vector;
 import thedpfarm.world.Bank;
 import thedpfarm.world.World;
+
 
 public class FarmManager {
 
@@ -45,7 +46,7 @@ public class FarmManager {
     public void buyAcres(String string) {
         int numAcres = Integer.parseInt(string);
         double amount = numAcres * World.getFarm().getTaxRate();
-        if(amount < Bank.accountBalance(World.getFarm().getFarmId())) {
+        if (amount < Bank.accountBalance(World.getFarm().getFarmId())) {
             acreDir.createAcres(numAcres, acrePrice);
         } else {
             dlg.insufficientFunds(amount);

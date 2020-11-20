@@ -79,21 +79,28 @@ public class SimulationDialog {
         } else {
             System.out.println(" Time of day :  Night");
         }
-        System.out.println(" Number of empty acres :  " + World.getFarm().getEmptyAcres().size());
-        System.out.println(" Number of acres with crops :  " + World.getFarm().numCropsAcres());
-        System.out.println(" Number of acres with livestock :  " + World.getFarm().numLivestockAcres());
-        System.out.println(" Account balance for this farm :  " + Bank.accountBalance(World.getFarm().getFarmId()));
+        System.out.println(" Number of empty acres :  " 
+            + World.getFarm().getEmptyAcres().size());
+        System.out.println(" Number of acres with crops :  " 
+            + World.getFarm().numCropsAcres());
+        System.out.println(" Number of acres with livestock :  " 
+            + World.getFarm().numLivestockAcres());
+        System.out.println(" Account balance for this farm :  " 
+            + Bank.accountBalance(World.getFarm().getFarmId()));
         System.out.println("-----------------------------------------------");
         System.out.flush();
     }
 
-    public void cropAudit(int num, UsageType uType, AssetType aType, State state) {
-        System.out.printf("%20d %20s %20s %20s%n", num, uType.toString(), aType.toString(), state.toString());
+    public void cropAudit(int num, UsageType usageType, AssetType assetType, State state) {
+        System.out.printf("%20d %20s %20s %20s%n", num, usageType.toString(), 
+            assetType.toString(), state.toString());
         System.out.flush();
     }
 
-    public void livestockAudit(int num, UsageType uType, AssetType aType, AnimalState.State state) {
-        System.out.printf("%20d %20s %20s %20s%n", num, uType.toString(), aType.toString(), state.toString());
+    public void livestockAudit(int num, UsageType usageType, AssetType assetType, 
+        AnimalState.State state) {
+        System.out.printf("%20d %20s %20s %20s%n", num, usageType.toString(), 
+            assetType.toString(), state.toString());
     }
 
     public void auditTable() {

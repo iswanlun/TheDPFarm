@@ -28,19 +28,19 @@ public class World {
     
     public static Farm getFarm(int id) {
         for (Farm f : farmList) {
-            if(f.getFarmId() == id) {
+            if (f.getFarmId() == id) {
                 return f;
             }
         }
         return null;
     }
 
-    public static void setFarm(int id) {
-        currentFarm = getFarm(id);
-    }
-
     public static Farm getFarm() {
         return currentFarm;
+    }
+
+    public static void setFarm(int id) {
+        currentFarm = getFarm(id);
     }
 
     public static int getNumFarms() {
@@ -53,14 +53,16 @@ public class World {
 
     public static void upgradeFarm() {
         switch (currentFarm.getLevel()) {
-            case 1: if (Bank.accountBalance(currentFarm.getFarmId()) > 400000) {
-                        currentFarm = new FarmLevelTwo(currentFarm);
-                    }
-                    break;
-            case 2: if (Bank.accountBalance(currentFarm.getFarmId()) > 500000) {
-                        currentFarm = new FarmLevelThree(currentFarm);
-                    }
-                    break;
+            case 1: 
+                if (Bank.accountBalance(currentFarm.getFarmId()) > 400000) {
+                    currentFarm = new FarmLevelTwo(currentFarm);
+                }
+                break;
+            case 2: 
+                if (Bank.accountBalance(currentFarm.getFarmId()) > 500000) {
+                    currentFarm = new FarmLevelThree(currentFarm);
+                }
+                break;
             default:
                 break;
         }
