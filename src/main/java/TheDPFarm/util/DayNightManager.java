@@ -30,7 +30,7 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
         }
         cyclePosition = !cyclePosition;
     }
-
+    
     @Override
     public void addObserver(DayAndNightObserver newObserver) {
         observers.add(newObserver);

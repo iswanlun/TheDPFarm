@@ -26,12 +26,12 @@ public class SimulationDialog {
         System.out.println(" does not match any known parameter form.");
     }
 
-	public void harvestMsg(String assetType, int acreId, int farmId) {
-        System.out.println(assetType + " on acre " + acreId + " of farm number " + farmId + " is ready for harvest.");
+	public void harvestMsg(String assetType, int farmId) {
+        System.out.println(assetType + " on farm number " + farmId + " is ready for harvest.");
     }
 
-    public void collectMsg(String assetType, int acreId, int farmId) {
-        System.out.println(assetType + " on acre " + acreId + " of farm number " + farmId + " can be collected.");
+    public void collectMsg(String assetType, int farmId) {
+        System.out.println(assetType + " on farm number " + farmId + " can be collected.");
     }
     
     public void purchaseMade(double balance) {

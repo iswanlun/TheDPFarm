@@ -2,11 +2,10 @@ package TheDPFarm.levels;
 
 public class FarmLevelThree extends FarmLevelTwo {
     
-    private FarmLevelTwo farm;
-    private double taxRateThree = 12.75;
+    private double taxRateThree = 18.75;
 
     public FarmLevelThree(FarmLevelTwo farm) {
-        this.farm = farm;
+        super(farm.getFarmId(), farm.getAllAcres());
     }
 
     public double getTaxRate() {

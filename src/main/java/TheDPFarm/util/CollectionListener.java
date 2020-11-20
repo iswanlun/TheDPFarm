@@ -9,6 +9,6 @@ public class CollectionListener {
     }
 
     public void collectionEvent(CollectionEvent e) {
-        simDlg.collectMsg(e.getAssetType(), e.getAcreId(), e.getFarmId());
+        simDlg.collectMsg(e.getAssetType().toString(), e.getFarmId());
     }
 }

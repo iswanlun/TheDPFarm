@@ -1,15 +1,19 @@
 package TheDPFarm.levels;
 
+import java.util.ArrayList;
+import TheDPFarm.util.Acre;
+
 public class FarmLevelTwo extends FarmLevelOne {
 
-    private FarmLevelOne farm;
     private double taxRateTwo = 16.4;
 
     public FarmLevelTwo(FarmLevelOne farm) {
-        this.farm = farm;
+        super(farm.getFarmId(), farm.getAllAcres());
     }
     
-    protected FarmLevelTwo() {} //Needed for implicit constructor of level three
+    protected FarmLevelTwo(int id, ArrayList<Acre> acres) {
+        super(id, acres);
+    } 
 
     public double getTaxRate() {
         return taxRateTwo;

@@ -1,6 +1,4 @@
-package TheDPFarm.levels;
-
-import java.util.ArrayList;
+package TheDPFarm.util;
 
 import TheDPFarm.plants.Crops;
 import TheDPFarm.animals.Livestock;
@@ -36,20 +34,14 @@ public class Acre {
         return atype;
     }
 
-    public boolean plantCrop(Crops crop) {
-        if(utype.equals(UsageType.CROPS)) {
-            this.crop = crop;
-            return true;
-        }
-        return false;
+    public void plantCrop(Crops crop) {
+        this.crop = crop;
+        this.utype = UsageType.CROPS;
     }
 
-    public boolean raiseLivestock(Livestock livestock) {
-        if(utype.equals(UsageType.LIVESTOCK)) {
-            this.livestock = livestock;
-            return true;
-        }
-        return false;
+    public void raiseLivestock(Livestock livestock) {
+        this.livestock = livestock;
+        this.utype = UsageType.LIVESTOCK;
     }
 
     public void renewAcre() {

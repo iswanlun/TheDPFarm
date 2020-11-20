@@ -1,7 +1,6 @@
 package TheDPFarm.util;
 
-import TheDPFarm.levels.Acre;
-import TheDPFarm.levels.Acre.AssetType;
+import TheDPFarm.util.Acre.AssetType;
 
 /**
  * This is used for planting crops, configures a acre of crops so that all that
@@ -9,37 +8,19 @@ import TheDPFarm.levels.Acre.AssetType;
  */
 public abstract class AcreBuilder {
 
-    public void buildAcre(Acre acre, AssetType aType) {
-        chargeBank();
-        createAssets();
-        insertAssets();
-        registerWithDayNight();
-        registerWithHarvest();
-    }
-
-    public void createAcre(int acres, double price) {
-        chargeBankAcre(acres, price);
-        createAcres(acres);
-    }
-
-    protected abstract void chargeBank();
-    protected abstract void createAssets();
-    protected abstract void insertAssets();
+    protected abstract void chargeBank(AssetType aType) throws FinanceException;
+    protected abstract void createAssets(AssetType aType);
     protected abstract void registerWithDayNight();
     protected abstract void registerWithHarvest();
+    protected abstract void registerWithCollect();
+    protected abstract void insertAssets(Acre acre);
 
-    protected abstract void chargeBankAcre(int acres, double price);
-    protected abstract void createAcres(int acres);
-
-    /**
-     * To construct an acre
-     *  - take in the farm id, type of crop, amount of crop
-     *    - Charge the bank for the amount
-     *    - instanciate the crops
-     *    - Put the crops on the land
-     *    - add the right amount of weeds
-     *    - register the crops with the day / night listener
-     *    - register crops with the harvest listner
-     */
-    
+    public void buildAcre(Acre acre, AssetType aType) throws FinanceException {
+        chargeBank(aType);
+        createAssets(aType);
+        registerWithDayNight();
+        registerWithHarvest();
+        registerWithCollect();
+        insertAssets(acre);
+    }    
 }

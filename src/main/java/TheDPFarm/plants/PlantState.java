@@ -1,11 +1,15 @@
 package TheDPFarm.plants;
 
-public abstract class PlantState {
+public class PlantState {
 
     private state currentState;
 
-    enum state {
-        Healthy, Sick, Seed, Seedling, ReadyForHarvest, Dead
+    public enum state {
+        SEED, SEEDLING, HEALTHY, HARVESTREADY, SICK, DEAD, WEEDINFESTED
+    }
+
+    public PlantState(state startState) {
+        currentState = startState;
     }
 
     public state getState() {
@@ -18,21 +22,25 @@ public abstract class PlantState {
 
     public void advanceState() {
         switch (currentState) {
-            case Healthy: 
-                currentState = state.ReadyForHarvest;
+            case HEALTHY: 
+                currentState = state.HARVESTREADY;
                 break;
-            case Sick:
-                currentState = state.Dead;
+            case SICK:
+                currentState = state.DEAD;
                 break;
-            case Seed:
-                currentState = state.Seedling;
+            case SEED:
+                currentState = state.SEEDLING;
                 break;
-            case Seedling:
-                currentState = state.Healthy;
-            case ReadyForHarvest:
-                currentState = state.Dead;
+            case SEEDLING:
+                currentState = state.HEALTHY;
+                break;
+            case HARVESTREADY:
+                currentState = state.DEAD;
+                break;
+            case WEEDINFESTED:
+                currentState = state.DEAD;
+                break;
             default:
-                currentState = state.Dead;
                 break;
         }
     }

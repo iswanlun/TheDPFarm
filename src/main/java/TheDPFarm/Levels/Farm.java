@@ -1,6 +1,7 @@
 package TheDPFarm.levels;
 
 import java.util.Vector;
+import TheDPFarm.util.Acre;
 
 public interface Farm {
 

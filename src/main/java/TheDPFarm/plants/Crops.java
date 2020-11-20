@@ -1,6 +1,5 @@
 package TheDPFarm.plants;
 
-import TheDPFarm.util.CollectionListener;
 import TheDPFarm.util.HarvestListener;
 
 public interface Crops extends Plant {
@@ -10,5 +9,4 @@ public interface Crops extends Plant {
     public int getDaysToHarvest();
     
     public void addHarvestListener(HarvestListener listener);
-    public void addCollectionListener(CollectionListener listener);
 }

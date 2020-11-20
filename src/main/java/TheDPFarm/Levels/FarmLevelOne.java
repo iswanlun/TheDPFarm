@@ -3,14 +3,14 @@ package TheDPFarm.levels;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import TheDPFarm.levels.Farm;
-import TheDPFarm.levels.Acre.UsageType;;
+import TheDPFarm.util.Acre.UsageType;
+import TheDPFarm.util.Acre;
 
 public class FarmLevelOne implements Farm {
 
     private int id;
     private ArrayList<Acre> acres;
-    private double taxRateOne = 18.4;
+    private double taxRateOne = 12.3;
 
     public FarmLevelOne(int size) {
         acres = new ArrayList<>();
@@ -19,7 +19,10 @@ public class FarmLevelOne implements Farm {
         }
     }
 
-    protected FarmLevelOne() {}
+    protected FarmLevelOne(int id, ArrayList<Acre> acres) {
+        this.id = id;
+        this.acres = acres;
+    }
 
     public int getFarmId() {
         return id;
@@ -59,5 +62,9 @@ public class FarmLevelOne implements Farm {
             } 
         }
         return empties;
+    }
+    
+    protected ArrayList<Acre> getAllAcres() {
+        return acres;
     }
 }

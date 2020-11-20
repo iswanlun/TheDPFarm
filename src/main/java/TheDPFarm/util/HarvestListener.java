@@ -13,6 +13,6 @@ public class HarvestListener {
     }
 
     public void harvestEvent(HarvestEvent e) {
-        simDlg.harvestMsg(e.getAssetType(), e.getAcreId(), e.getFarmId());
+        simDlg.harvestMsg(e.getAssetType().toString(), e.getFarmId());
     }
 }

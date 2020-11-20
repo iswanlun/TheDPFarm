@@ -2,10 +2,8 @@ package TheDPFarm.util;
 
 import java.util.Vector;
 
-import TheDPFarm.levels.Acre;
+import TheDPFarm.util.Acre.AssetType;
 import TheDPFarm.levels.FarmLevelOne;
-import TheDPFarm.levels.Acre.AssetType;
-import TheDPFarm.levels.Acre.UsageType;
 import TheDPFarm.world.Bank;
 import TheDPFarm.world.World;
 
@@ -19,6 +17,7 @@ public class FarmManger {
 	private AcreDirector acreDir;
 	private HarvestListener harvestListener;
 	private CollectionListener collectionListener;
+
 
 	public FarmManger(SimulationDialog dlg) {
 		this.dlg = dlg;
