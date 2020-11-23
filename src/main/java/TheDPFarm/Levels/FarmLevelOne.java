@@ -15,6 +15,8 @@ public class FarmLevelOne implements Farm {
     private int id;
     private ArrayList<Acre> acres;
     private double taxRateOne = 1.123;
+    protected int dogCoverage = 0;
+    protected int groundCoverage = 0;
 
     public FarmLevelOne(int size) {
         acres = new ArrayList<>();
@@ -23,9 +25,15 @@ public class FarmLevelOne implements Farm {
         }
     }
 
-    protected FarmLevelOne(int id, ArrayList<Acre> acres) {
-        this.id = id;
-        this.acres = acres;
+    protected FarmLevelOne(Farm farm) {
+        this.id = farm.getFarmId();
+        this.acres = ((FarmLevelOne) farm).getAllAcres();
+        this.dogCoverage = farm.getDogCoverage();
+        this.groundCoverage = farm.getGroundCoverage();
+    }
+
+    protected ArrayList<Acre> getAllAcres() {
+        return acres;
     }
 
     public int getFarmId() {
@@ -68,10 +76,6 @@ public class FarmLevelOne implements Farm {
         return empties;
     }
     
-    protected ArrayList<Acre> getAllAcres() {
-        return acres;
-    }
-
     public Vector<Acre> getHarvestAcres(AssetType type) {
         Vector<Acre> harvestAcres = new Vector<>();
         for (Acre a : acres) {
@@ -89,7 +93,6 @@ public class FarmLevelOne implements Farm {
     }
 
     public Vector<Acre> getCollectAcres(AssetType type) {
-        System.out.println("[DEBUG] Collect acres.");
         Vector<Acre> collectAcres = new Vector<>();
         for (Acre a : acres) {
             if (a.getAssetType().equals(type)) {
@@ -99,7 +102,6 @@ public class FarmLevelOne implements Farm {
                 }
             }
         }
-        System.out.println("[DEBUG] vector size : " + collectAcres.size());
         return collectAcres;
     }
 
@@ -173,4 +175,29 @@ public class FarmLevelOne implements Farm {
             }
         }
     }
+
+    public int getPredatorRisk() {
+        return 50;
+    }
+
+    public int getWeedRisk() {
+        return 50;
+    }
+
+    public boolean addDogs(int amount) {
+        return false;
+    }
+
+    public boolean addGroundCover(int amount) {
+        return false;
+    }
+
+    public int getDogCoverage() {
+        return dogCoverage;
+    }
+
+    public int getGroundCoverage() {
+        return groundCoverage;
+    }
 }
+

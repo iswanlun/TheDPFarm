@@ -45,7 +45,7 @@ public class CommandProcessor {
                     break;
                 case "buy": mngr.buyAcres(args[2]);
                     break;
-                case "fence": mngr.addFence(args[2]);
+                case "gcover": mngr.addGroundCover(args[2]);
                     break;
                 case "dogs": mngr.addDogs(args[2]);
                     break;

@@ -55,7 +55,8 @@ Decorator Pattern:
 
     Functionality requirments:
     1. Farms are automatically upgraded once the farm has acquired enough currency.
-    2. Difficulty increases with levels, tax rate changes, fences and dogs become availible reduce attacks by predators
+    2. Difficulty increases with levels, tax rate changes, groundcover and dogs become availible reduce attacks by predators and weeds
+    predators and weeds become more likely as levels increase.
     3. Crops are grown on farms and have a chance to become diseased, this changes as levels increase
 ```
 ```

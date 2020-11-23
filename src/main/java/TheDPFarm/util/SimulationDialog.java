@@ -124,4 +124,20 @@ public class SimulationDialog {
         System.out.println("The arguments provided are malformed or in error.\n If you have not created a farm, do so with 'f new'");
     }
 
+	public void failedToAddDogs() {
+        System.out.println("No dogs added, farm must be upgraded to level two.");
+    }
+    
+    public void failedToAddGroundCover() {
+        System.out.println("No ground cover added, farm must be upgraded to level three.");
+    }
+
+	public void addedDogs(double balance) {
+        System.out.println("Dogs purchased, new balance : " + balance);
+	}
+
+	public void addedGroundCover(double balance) {
+        System.out.println("Ground cover purchased, new balance : " + balance);
+	}
+
 }

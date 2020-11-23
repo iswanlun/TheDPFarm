@@ -1,21 +1,13 @@
 package thedpfarm.levels;
 
-import java.util.ArrayList;
-
-import thedpfarm.util.Acre;
-
 public class FarmLevelTwo extends FarmLevelOne {
 
     private double taxRateTwo = 1.164;
 
     public FarmLevelTwo(Farm farm) {
-        super(farm.getFarmId(), ((FarmLevelOne) farm).getAllAcres());
+        super(farm);
     }
     
-    protected FarmLevelTwo(int id, ArrayList<Acre> acres) {
-        super(id, acres);
-    } 
-
     @Override
     public double getTaxRate() {
         return taxRateTwo;
@@ -25,4 +17,23 @@ public class FarmLevelTwo extends FarmLevelOne {
     public int getLevel() {
         return 2;
     }
+
+    @Override
+    public int getPredatorRisk() {
+        return (int) Math.floor(
+            50 - (20 * (dogCoverage / size()))
+        );
+    }
+
+    @Override
+    public int getWeedRisk() {
+        return 50;
+    }
+
+    @Override
+    public boolean addDogs(int amount) {
+        dogCoverage += amount;
+        return true;
+    }
+
 }

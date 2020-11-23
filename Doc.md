@@ -11,8 +11,8 @@ f (farm)
 
 	sell <amount> 
 	buy <amount> 
-	fence <amount> (keeps some predators out, availible in level two) 
-	dogs <amount> (keeps many predators out, availible in level three) 
+	dogs <amount> (keeps some predators out, availible in level two) 
+	gcover <amount> (short for ground cover, keeps weeds out, availible in level three) 
 	status 
 	switch <farm id> 
 	new 

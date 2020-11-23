@@ -62,7 +62,7 @@ public abstract class Crops implements Plant {
         } else if (currentState.getState().equals(State.SICK)) {
             currentState.advanceState();
         }
-        int weedOdds = randGenerator.nextInt(40); // %5 chance of getting weeds
+        int weedOdds = randGenerator.nextInt(World.getFarm().getWeedRisk());
         if (weedOdds == 2) {
             setState(State.WEEDINFESTED);
         }

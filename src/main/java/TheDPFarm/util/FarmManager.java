@@ -21,6 +21,8 @@ public class FarmManager {
     private static final int farmPrice = 100000;
     private static final int acrePrice = 5000;
     private static final int defaultFarmSize = 50;
+    private static final int dogPricePerAcre = 2000;
+    private static final int groundCoverPerAcre = 2500;
 
     private SimulationDialog dlg;
     private AcreDirector acreDir;
@@ -53,10 +55,28 @@ public class FarmManager {
         }
     }
 
-    public void addFence(String string) {
+    public void addGroundCover(String string) {
+        int groundCoverAcres = Integer.parseInt(string);
+        boolean success = World.getFarm().addGroundCover(groundCoverAcres);
+        if (success) {
+            double balance = Bank.findAccount(World.getFarm().getFarmId())
+                .makeWithdrawl(groundCoverAcres * groundCoverPerAcre * World.getFarm().getTaxRate());
+            dlg.addedGroundCover(balance);
+        } else {
+            dlg.failedToAddGroundCover();
+        }
     }
 
     public void addDogs(String string) {
+        int dogCoverAcres = Integer.parseInt(string);
+        boolean success = World.getFarm().addDogs(dogCoverAcres);
+        if (success) {
+            double balance = Bank.findAccount(World.getFarm().getFarmId())
+                .makeWithdrawl(dogCoverAcres * dogPricePerAcre * World.getFarm().getTaxRate());
+            dlg.addedDogs(balance);
+        } else {
+            dlg.failedToAddDogs();
+        }
     }
 
     public void switchFarm(String string) {

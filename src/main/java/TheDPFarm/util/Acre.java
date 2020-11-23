@@ -83,7 +83,6 @@ public class Acre {
     }
 
     public void collect(SimulationDialog dlg) {
-        System.out.println("[DEBUG] Collect.");
         double profit = 0;
         if (usageType.equals(UsageType.LIVESTOCK)) {
             profit += (livestock.getCollectPricePerBatch() * livestock.getBatchesPerAcre());

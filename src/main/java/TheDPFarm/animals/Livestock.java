@@ -104,7 +104,7 @@ public abstract class Livestock implements Animal {
             setState(State.DEAD);
         }
 
-        int predatorOdds = randGenerator.nextInt(50);
+        int predatorOdds = randGenerator.nextInt(World.getFarm().getPredatorRisk());
         if (predatorOdds == 2) {
             setState(State.EATEN);
         }

@@ -40,4 +40,16 @@ public interface Farm {
     public double weedCost();
 
     public void removeWeeds();
+
+    public int getPredatorRisk();
+
+    public int getWeedRisk();
+
+    public boolean addDogs(int amount);
+
+    public boolean addGroundCover(int amount);
+
+    public int getDogCoverage();
+
+    public int getGroundCoverage();
 }
