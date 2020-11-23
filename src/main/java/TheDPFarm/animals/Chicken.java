@@ -5,6 +5,11 @@ import thedpfarm.util.Acre.AssetType;
 
 public class Chicken extends Livestock {
 
+    /**
+     * Implementation of a chicken which extends the abstract class Animal.
+     * @param state Initial state for the bird.
+     * @param farmId The farm id this animal belongs to.
+     */
     public Chicken(State state, int farmId) {
         batchSize = 50;
         batchPrice = 100;

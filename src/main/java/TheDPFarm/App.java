@@ -3,10 +3,11 @@ package thedpfarm;
 import java.util.Scanner;
 import thedpfarm.util.CommandProcessor;
 
-/**
- * refrence: http://www.blackwasp.co.uk/GofPatterns.aspx.
- */
 public class App {
+    /**
+     * Main method for running the simulator. 
+     * @param args Accepts no arguments.
+     */
     public static void main(String[] args) {
 
         Scanner in = new Scanner(System.in, "UTF-8");
@@ -24,5 +25,6 @@ public class App {
                 line = null;
             }
         }
+        System.exit(0);
     }
 }

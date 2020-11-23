@@ -20,6 +20,10 @@ public class PlantState {
         this.currentState = newState;
     }
 
+    /**
+     * Specifies the order in which this plant advances in.
+     * Keeps states consistant by inforcement.
+     */
     public void advanceState() {
         switch (currentState) {
             case HEALTHY: 

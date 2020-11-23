@@ -26,8 +26,9 @@ public class Acre {
     private UsageType usageType = UsageType.EMPTY;
     private AssetType assetType = AssetType.EMPTY;
 
-    public Acre(UsageType type) {
-        this.usageType = type;
+    public Acre(UsageType usagetype, AssetType assettype) {
+        this.usageType = usagetype;
+        this.assetType = assettype;
     }
 
     public UsageType getUsageType() {

@@ -1,7 +1,5 @@
 package thedpfarm.util;
 
-import thedpfarm.world.World;
-
 public class CommandProcessor {
 
     SimulationDialog dlg;
@@ -49,8 +47,7 @@ public class CommandProcessor {
                     break;
                 case "dogs": mngr.addDogs(args[2]);
                     break;
-                case "status": World.upgradeFarm();
-                               dlg.statusMessage();
+                case "status": dlg.statusMessage();
                     break;
                 case "switch": mngr.switchFarm(args[2]);
                     break;

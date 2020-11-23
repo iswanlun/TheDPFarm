@@ -78,6 +78,11 @@ public abstract class Livestock implements Animal {
         return type;
     }
 
+    /**
+     * Method inforced by implementation of the DayAndNightObserver interface.
+     * Called whenever day switched to night. Advances livestock lifecycles
+     * once daily, creates harvest or collection events.
+     */
     public void notifyDay() {
         this.age++;
         collectableToggle = (collectableToggle + 1) % 3;
@@ -96,6 +101,11 @@ public abstract class Livestock implements Animal {
         }
     }
 
+    /**
+     * Method inforced by implementation of the DayAndNightObserver interface.
+     * Called whenever night switches to day. Calculates odds of night time 
+     * events occureing for livestock.
+     */
     public void notifyNight() {
         int sickOdds = randGenerator.nextInt(50);
         if (sickOdds == 2) {
@@ -114,6 +124,10 @@ public abstract class Livestock implements Animal {
         randGenerator = new Random();
     }
 
+    /**
+     * Enables the removal of this acres listeners from the cycle of day
+     * and night, and removes its harvest and collection listners.
+     */
     public void purge() {
 
         World.TimeManager.acquire();

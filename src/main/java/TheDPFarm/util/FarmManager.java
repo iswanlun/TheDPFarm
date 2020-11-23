@@ -6,6 +6,7 @@ import thedpfarm.animals.Chicken;
 import thedpfarm.animals.Cow;
 import thedpfarm.animals.Hog;
 import thedpfarm.animals.Sheep;
+import thedpfarm.levels.Farm;
 import thedpfarm.levels.FarmLevelOne;
 import thedpfarm.plants.Corn;
 import thedpfarm.plants.Mushrooms;
@@ -47,9 +48,10 @@ public class FarmManager {
 
     public void buyAcres(String string) {
         int numAcres = Integer.parseInt(string);
-        double amount = numAcres * World.getFarm().getTaxRate();
+        double amount = numAcres * acrePrice * World.getFarm().getTaxRate();
         if (amount < Bank.accountBalance(World.getFarm().getFarmId())) {
-            acreDir.createAcres(numAcres, acrePrice);
+            Bank.findAccount(World.getFarm().getFarmId()).makeWithdrawl(amount);
+            acreDir.createAcres(numAcres);
         } else {
             dlg.insufficientFunds(amount);
         }
@@ -86,13 +88,13 @@ public class FarmManager {
     public void newFarm() {
         if (World.getNumFarms() == 0) {
             World.addFarm(new FarmLevelOne(defaultFarmSize));
-            Bank.addAccount(World.getFarm().getFarmId());
+            Bank.addAccount(World.getFarm().getFarmId(), this);
         } else {
             if (Bank.accountBalance(World.getFarm().getFarmId()) > farmPrice + 1000) {
                 double newBalance = Bank.findAccount(World.getFarm().getFarmId())
                     .makeWithdrawl(farmPrice);
                 World.addFarm(new FarmLevelOne(defaultFarmSize));
-                Bank.addAccount(World.getFarm().getFarmId());
+                Bank.addAccount(World.getFarm().getFarmId(), this);
                 dlg.purchaseMade(newBalance);
             } else {
                 dlg.insufficientFunds(farmPrice);
@@ -186,6 +188,13 @@ public class FarmManager {
         } else {
             dlg.insufficientLand(amt);
         }
+    }
+
+    public void expellFarm(int farmId) {
+        Farm toRemove = World.getFarm(farmId);
+        toRemove.purge();
+        World.removeFarm(toRemove);
+        dlg.expellFarm(farmId);
     }
 
     private AssetType stringToEnumConverter(String string) throws IllegalArgumentException {

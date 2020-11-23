@@ -1,6 +1,7 @@
 package thedpfarm.world;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import thedpfarm.levels.Farm;
 import thedpfarm.levels.FarmLevelThree;
@@ -15,15 +16,14 @@ public class World {
 
     public static void addFarm(Farm newFarm) {
         farmList.add(newFarm);
-        newFarm.setId(farmList.indexOf(newFarm));
+        Random r = new Random();
+        int farmId = r.nextInt(899) + 100;
+        newFarm.setId(farmId);
         currentFarm = newFarm;
     }
 
     public static void removeFarm(Farm oldFarm) {
         farmList.remove(oldFarm);
-        for (Farm f : farmList) {
-            f.setId(farmList.indexOf(f));
-        }
     }
     
     public static Farm getFarm(int id) {

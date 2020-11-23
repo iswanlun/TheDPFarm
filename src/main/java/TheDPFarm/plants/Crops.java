@@ -40,6 +40,10 @@ public abstract class Crops implements Plant {
         randGenerator = new Random();
     }
 
+    /**
+     * Notifies this crop that it is now day time, advancing its lifecycle
+     * and advancing its state.
+     */
     public void notifyDay() {
 
         this.age++;
@@ -55,6 +59,10 @@ public abstract class Crops implements Plant {
         }
     }
 
+    /**
+     * Notifys this object that a night event has occured. Calculates the odds of
+     * certain events occuring to this plant.
+     */
     public void notifyNight() {
         int sickOdds = randGenerator.nextInt(40); // %5 chance of early death
         if (sickOdds == 2) {
@@ -84,6 +92,10 @@ public abstract class Crops implements Plant {
         this.harvestListener = listener;
     }
 
+    /**
+     * Removes this object from the DayAndNightObserver listener,
+     * and removes its harvest listner.
+     */
     public void purge() {
 
         World.TimeManager.acquire();

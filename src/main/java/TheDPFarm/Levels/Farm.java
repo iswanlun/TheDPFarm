@@ -52,4 +52,6 @@ public interface Farm {
     public int getDogCoverage();
 
     public int getGroundCoverage();
+
+    public void purge();
 }

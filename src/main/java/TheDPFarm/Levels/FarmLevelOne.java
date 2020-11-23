@@ -8,6 +8,7 @@ import thedpfarm.plants.PlantState.State;
 import thedpfarm.util.Acre;
 import thedpfarm.util.Acre.AssetType;
 import thedpfarm.util.Acre.UsageType;
+import thedpfarm.world.Bank;
 import thedpfarm.util.SimulationDialog;
 
 public class FarmLevelOne implements Farm {
@@ -18,10 +19,14 @@ public class FarmLevelOne implements Farm {
     protected int dogCoverage = 0;
     protected int groundCoverage = 0;
 
+    /**
+     * Constructor which creates a new farm of some size.
+     * @param size The number of acres of the new farm.
+     */
     public FarmLevelOne(int size) {
         acres = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            acres.add(new Acre(UsageType.EMPTY));
+            acres.add(new Acre(UsageType.EMPTY, AssetType.EMPTY));
         }
     }
 
@@ -52,10 +57,16 @@ public class FarmLevelOne implements Farm {
         acres.add(addition);
     }
 
+    /**
+     * Removes the number of acres specified from the farm.
+     */
     public void trimFarm(int removal) {
+        Vector<Acre> toBeRemoved = new Vector<>();
         for (int i = 0; i < removal; i++) {
-            acres.remove(acres.size() - 1);
+            acres.get(i).renewAcre();
+            toBeRemoved.add(acres.get(i));
         }
+        acres.removeAll(toBeRemoved);
     }
 
     public Acre getSpecificAcre(int index) {
@@ -66,6 +77,9 @@ public class FarmLevelOne implements Farm {
         return taxRateOne;
     }
 
+    /**
+     * Gets a vector of acres on which there is nothing growing / living.
+     */
     public Vector<Acre> getEmptyAcres() {
         Vector<Acre> empties = new Vector<>();
         for (Acre a : acres) {
@@ -76,6 +90,10 @@ public class FarmLevelOne implements Farm {
         return empties;
     }
     
+    /**
+     * Returns a vector of acres which are harvest ready. Acres can be
+     * both Crop or Livestock acres, every thing ready is harvested.
+     */
     public Vector<Acre> getHarvestAcres(AssetType type) {
         Vector<Acre> harvestAcres = new Vector<>();
         for (Acre a : acres) {
@@ -92,6 +110,10 @@ public class FarmLevelOne implements Farm {
         return harvestAcres;
     }
 
+    /**
+     * Returns a vector of acres on which livestock have indicated that 
+     * products can be collected from them.
+     */
     public Vector<Acre> getCollectAcres(AssetType type) {
         Vector<Acre> collectAcres = new Vector<>();
         for (Acre a : acres) {
@@ -105,6 +127,9 @@ public class FarmLevelOne implements Farm {
         return collectAcres;
     }
 
+    /**
+     * Gets the number of crop acres on a farm.
+     */
     public int numCropsAcres() {
         int counter = 0;
         for (Acre a : acres) {
@@ -115,6 +140,9 @@ public class FarmLevelOne implements Farm {
         return counter;
     }
 
+    /**
+     * Gets the number of livestock acres in a farm.
+     */
     public int numLivestockAcres() {
         int counter = 0;
         for (Acre a : acres) {
@@ -125,6 +153,10 @@ public class FarmLevelOne implements Farm {
         return counter;
     }
 
+    /**
+     * Audits the planted crops and generates a report for every acre through
+     * SimulationDialog. Also removes and dead crops.
+     */
     public void auditCrops(SimulationDialog dlg) {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.CROPS)) {
@@ -137,6 +169,10 @@ public class FarmLevelOne implements Farm {
         }
     }
 
+    /**
+     * Audits the livestock being raised and generates a report through
+     * SimulationDialog. Also removes any dead or eaten livestock.
+     */
     public void auditLivestock(SimulationDialog dlg) {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.LIVESTOCK)) {
@@ -154,18 +190,25 @@ public class FarmLevelOne implements Farm {
         return 1;
     }
 
+    /**
+     * Calculates the cost for removing weeds from all planted acres.
+     */
     public double weedCost() {
         double cost = 0;
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.CROPS)) {
                 if (a.getCrop().getState().equals(State.WEEDINFESTED)) {
-                    cost += 100;
+                    cost += 300;
                 }
             }
         }
         return cost * getTaxRate();
     }
 
+    /**
+     * When called, removes all crops which have the WEEDINFESTED status,
+     * restoring them to HEALTHY and preventing them from dying.
+     */
     public void removeWeeds() {
         for (Acre a : acres) {
             if (a.getUsageType().equals(UsageType.CROPS)) {
@@ -174,6 +217,11 @@ public class FarmLevelOne implements Farm {
                 }
             }
         }
+    }
+
+    public void purge() {
+        trimFarm(size());
+        Bank.removeAccount(Bank.findAccount(id));
     }
 
     public int getPredatorRisk() {

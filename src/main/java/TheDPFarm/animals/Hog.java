@@ -5,6 +5,11 @@ import thedpfarm.util.Acre.AssetType;
 
 public class Hog extends Livestock {
 
+    /**
+     * Implementation of a hog which extends the abstract class Animal.
+     * @param state The inital state of the animal.
+     * @param farmId The farm this animal belongs to.
+     */
     public Hog(State state, int farmId) {
         batchSize = 10;
         batchPrice = 120;

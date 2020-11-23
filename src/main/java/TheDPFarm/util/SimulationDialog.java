@@ -71,7 +71,7 @@ public class SimulationDialog {
 
     public void statusMessage() {
         System.out.println("----- Farm Status -----------------------------");
-        System.out.println(" Farm Id :  " + (World.getFarm().getFarmId() + 1));
+        System.out.println(" Farm Id :  " + (World.getFarm().getFarmId()));
         System.out.println(" Farm level :  " + World.getFarm().getLevel());
         System.out.println(" Farm size in acres :  " + World.getFarm().size());
         if (World.TimeManager.getTime()) {
@@ -88,13 +88,11 @@ public class SimulationDialog {
         System.out.println(" Account balance for this farm :  " 
             + Bank.accountBalance(World.getFarm().getFarmId()));
         System.out.println("-----------------------------------------------");
-        System.out.flush();
     }
 
     public void cropAudit(int num, UsageType usageType, AssetType assetType, State state) {
         System.out.printf("%20d %20s %20s %20s%n", num, usageType.toString(), 
             assetType.toString(), state.toString());
-        System.out.flush();
     }
 
     public void livestockAudit(int num, UsageType usageType, AssetType assetType, 
@@ -105,7 +103,6 @@ public class SimulationDialog {
 
     public void auditTable() {
         System.out.printf("%20s %20s %20s %20s%n", "#", "Usage Type", "Asset Type", "State");
-        System.out.flush();
     }
 
     public void removeWeedsCost() {
@@ -121,10 +118,11 @@ public class SimulationDialog {
     }
     
     public void badArgumentType() {
-        System.out.println("The arguments provided are malformed or in error.\n If you have not created a farm, do so with 'f new'");
+        System.out.println("The arguments provided are malformed or in error. \n" +
+            "If you have not created a farm, do so with 'f new'");
     }
 
-	public void failedToAddDogs() {
+    public void failedToAddDogs() {
         System.out.println("No dogs added, farm must be upgraded to level two.");
     }
     
@@ -132,12 +130,16 @@ public class SimulationDialog {
         System.out.println("No ground cover added, farm must be upgraded to level three.");
     }
 
-	public void addedDogs(double balance) {
+    public void addedDogs(double balance) {
         System.out.println("Dogs purchased, new balance : " + balance);
-	}
+    }
 
-	public void addedGroundCover(double balance) {
+    public void addedGroundCover(double balance) {
         System.out.println("Ground cover purchased, new balance : " + balance);
-	}
+    }
+
+    public void expellFarm(int farmId) {
+        System.out.println("The farm " + farmId + " has been terminated for failing to produce.");        
+    }
 
 }

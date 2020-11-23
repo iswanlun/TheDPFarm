@@ -1,13 +1,14 @@
 package thedpfarm.world;
 
 import java.util.ArrayList;
+import thedpfarm.util.FarmManager;
 
 public class Bank {
     
     private static ArrayList<BankAccount> _accounts = new ArrayList<>();
 
-    public static void addAccount(int id) {
-        _accounts.add(new BankAccount(id));
+    public static void addAccount(int id, FarmManager farmManager) {
+        _accounts.add(new BankAccount(id, farmManager));
     }
 
     public static void removeAccount(BankAccount oldAccount) {
