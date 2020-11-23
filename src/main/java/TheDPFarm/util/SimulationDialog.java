@@ -121,7 +121,7 @@ public class SimulationDialog {
     }
     
     public void badArgumentType() {
-        System.out.println("The arguments provided are malformed.");
+        System.out.println("The arguments provided are malformed or in error.\n If you have not created a farm, do so with 'f new'");
     }
 
 }

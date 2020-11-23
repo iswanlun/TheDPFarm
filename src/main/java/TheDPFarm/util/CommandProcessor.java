@@ -16,17 +16,21 @@ public class CommandProcessor {
     public void process(String line) {
         line = line.toLowerCase();
         String[] tokens = line.split(" ");
-        switch (tokens[0]) {
-            case "f": farmProcessor(tokens);
-                break;
-            case "c": cropProcessor(tokens);
-                break;
-            case "l": livestockProcessor(tokens);
-                break; 
-            case "help": dlg.help();
-                break;
-            default:
-                dlg.defaultMsg(tokens);
+        try {
+            switch (tokens[0]) {
+                case "f": farmProcessor(tokens);
+                    break;
+                case "c": cropProcessor(tokens);
+                    break;
+                case "l": livestockProcessor(tokens);
+                    break; 
+                case "help": dlg.help();
+                    break;
+                default:
+                    dlg.defaultMsg(tokens);
+            }
+        } catch (NullPointerException n) {
+            dlg.badArgumentType();
         }
     }
 
@@ -45,8 +49,8 @@ public class CommandProcessor {
                     break;
                 case "dogs": mngr.addDogs(args[2]);
                     break;
-                case "status": dlg.statusMessage();
-                                World.upgradeFarm();
+                case "status": World.upgradeFarm();
+                               dlg.statusMessage();
                     break;
                 case "switch": mngr.switchFarm(args[2]);
                     break;
