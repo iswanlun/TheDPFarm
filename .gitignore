@@ -13,3 +13,4 @@ bin
 gradlew.bat
 settings.gradle
 .classpath
+.gitattributes
