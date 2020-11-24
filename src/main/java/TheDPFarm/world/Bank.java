@@ -15,6 +15,11 @@ public class Bank {
         _accounts.remove(oldAccount);
     }
 
+    /**
+     * Returns a specific account.
+     * @param id The id of the account to return.
+     * @return The account itself.
+     */
     public static BankAccount findAccount(int id) {
         for (BankAccount a : _accounts) {
             if (a.getFarmId() == id) {
@@ -24,6 +29,11 @@ public class Bank {
         return null;
     }
     
+    /**
+     * Gets the current account balance.
+     * @param id The account / farm number to use.
+     * @return The accounts balance.
+     */
     public static double accountBalance(int id) {
         for (BankAccount a : _accounts) {
             if (a.getFarmId() == id) {

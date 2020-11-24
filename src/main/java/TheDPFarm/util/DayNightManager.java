@@ -19,12 +19,18 @@ public class DayNightManager extends TimerTask implements DayAndNightObservable 
 
     private ReentrantLock mutex = new ReentrantLock();
     
+    /**
+     * Constructor for the manager, starts the timer working.
+     */
     public DayNightManager() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(this, 2000, 2000);
         //timer.scheduleAtFixedRate(this, 20000, 20000);
     }
 
+    /**
+     * The run method inforced by TimerTask.
+     */
     public void run() {
         try {
             mutex.lock();

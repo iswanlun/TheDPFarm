@@ -20,6 +20,9 @@ public abstract class AcreBuilder {
     
     protected abstract void insertAssets(Acre acre);
 
+    /**
+     * Methodology to create a new acre.
+     */
     public void buildAcre(Acre acre, AssetType assetType) throws FinanceException {
         createAssets(assetType);
         chargeBank(assetType);

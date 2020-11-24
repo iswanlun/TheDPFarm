@@ -14,6 +14,11 @@ public class AcreDirector {
         livestockBuilder = new Livestockbuilder(dlg);
     }
 
+    /**
+     * Creates a crop acre.
+     * @param acre Acre to construct.
+     * @param assetType Asset type to insert.
+     */
     public void constructCropAcre(Acre acre, AssetType assetType) {
         try {
             cropBuilder.buildAcre(acre, assetType);
@@ -22,6 +27,11 @@ public class AcreDirector {
         }
     }
 
+    /**
+     * Creates a livestock acre.
+     * @param acre Acre to construct.
+     * @param assetType Asset type to insert.
+     */
     public void constructLivestockAcre(Acre acre, AssetType assetType) {
         try {
             livestockBuilder.buildAcre(acre, assetType);
@@ -30,6 +40,10 @@ public class AcreDirector {
         }
     }
 
+    /**
+     * Created a series of new unused acres.
+     * @param acres Amount of acres to be created.
+     */
     public void createAcres(int acres) {
         for (int i = 0; i < acres; i++) {
             World.getFarm().expandFarm(new Acre(UsageType.EMPTY, AssetType.EMPTY));

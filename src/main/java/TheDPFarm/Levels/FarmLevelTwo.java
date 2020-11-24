@@ -21,7 +21,7 @@ public class FarmLevelTwo extends FarmLevelOne {
     @Override
     public int getPredatorRisk() {
         return (int) Math.floor(
-            50 - (20 * (dogCoverage / size()))
+            30 + (20 * (dogCoverage / size()))
         );
     }
 

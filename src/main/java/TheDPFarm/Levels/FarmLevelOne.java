@@ -8,8 +8,9 @@ import thedpfarm.plants.PlantState.State;
 import thedpfarm.util.Acre;
 import thedpfarm.util.Acre.AssetType;
 import thedpfarm.util.Acre.UsageType;
-import thedpfarm.world.Bank;
 import thedpfarm.util.SimulationDialog;
+import thedpfarm.world.Bank;
+
 
 public class FarmLevelOne implements Farm {
 
@@ -247,5 +248,6 @@ public class FarmLevelOne implements Farm {
     public int getGroundCoverage() {
         return groundCoverage;
     }
+
 }
 

@@ -5,12 +5,20 @@ public class CommandProcessor {
     SimulationDialog dlg;
     FarmManager mngr;
 
+    /**
+     * Constructor for command processor.
+     */
     public CommandProcessor() {
         dlg = new SimulationDialog();
         mngr = new FarmManager(dlg);
         dlg.welcome();
     }
 
+    /**
+     * Given a string of commands, parses and directs them
+     * based on the first character.
+     * @param line The line to be parsed.
+     */
     public void process(String line) {
         line = line.toLowerCase();
         String[] tokens = line.split(" ");

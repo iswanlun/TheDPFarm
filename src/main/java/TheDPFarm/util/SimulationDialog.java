@@ -21,6 +21,10 @@ public class SimulationDialog {
         System.out.println("Welcome to TheDPFarm Simulator. Type 'help' for help.");
     }
     
+    /**
+     * The default message given a string of noncomplient characters.
+     * @param args An array of string arguments to be displayed.
+     */
     public void defaultMsg(String[] args) {
         System.out.print("The command string : ");
         for (String s : args) {
@@ -69,6 +73,9 @@ public class SimulationDialog {
         System.out.println("The paramater : " + param + " is invalid.");
     }
 
+    /**
+     * Prints the status of the current farm.
+     */
     public void statusMessage() {
         System.out.println("----- Farm Status -----------------------------");
         System.out.println(" Farm Id :  " + (World.getFarm().getFarmId()));
@@ -117,9 +124,12 @@ public class SimulationDialog {
         System.out.println("Too few arguments provided.");
     }
     
+    /**
+     * Used for malformed arguments.
+     */
     public void badArgumentType() {
-        System.out.println("The arguments provided are malformed or in error. \n" +
-            "If you have not created a farm, do so with 'f new'");
+        System.out.println("The arguments provided are malformed or in error. \n" 
+            + "If you have not created a farm, do so with 'f new'");
     }
 
     public void failedToAddDogs() {
@@ -138,8 +148,22 @@ public class SimulationDialog {
         System.out.println("Ground cover purchased, new balance : " + balance);
     }
 
+    /**
+     * Defunct terminal condition.
+     * @param farmId Condition location, farm id.
+     */
     public void expellFarm(int farmId) {
-        System.out.println("The farm " + farmId + " has been terminated for failing to produce.");        
+        System.out.println("The farm " + farmId 
+            + " has been terminated for failing to produce.");        
+    }
+
+    /**
+     * Successful terminal condition.
+     * @param farmId Farm id of condition.
+     */
+    public void simulationCompleted(int farmId) {
+        System.out.println("The farm " + farmId 
+            + " has been has completed the simulation successfully.");   
     }
 
 }

@@ -39,18 +39,29 @@ public class Acre {
         return assetType;
     }
 
+    /**
+     * Inserts crops into acre.
+     * @param crop Crops to be inserted.
+     */
     public void plantCrop(Crops crop) {
         this.crop = crop;
         assetType = crop.getType();
         this.usageType = UsageType.CROPS;
     }
 
+    /**
+     * Inserts livestock into acre.
+     * @param livestock Livestock tobe put on farm.
+     */
     public void raiseLivestock(Livestock livestock) {
         this.livestock = livestock;
         assetType = livestock.getType();
         this.usageType = UsageType.LIVESTOCK;
     }
 
+    /**
+     * Renews an acre back to unused status.
+     */
     public void renewAcre() {
         if (livestock != null) {
             livestock.purge();
@@ -71,6 +82,10 @@ public class Acre {
         return livestock;
     }
 
+    /**
+     * Allows for livestock and crops to be harvested.
+     * @param dlg Dialog to alert status.
+     */
     public void harvest(SimulationDialog dlg) {
         double profit = 0;
         if (usageType.equals(UsageType.CROPS)) {
@@ -83,6 +98,10 @@ public class Acre {
         dlg.harvestSold(bal);
     }
 
+    /**
+     * Allows for livestock products to be collected.
+     * @param dlg Dialog to alert status.
+     */
     public void collect(SimulationDialog dlg) {
         double profit = 0;
         if (usageType.equals(UsageType.LIVESTOCK)) {

@@ -36,8 +36,7 @@ public class AppTest {
         level = 3;
         assertEquals(level, World.getFarm().getLevel());
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void farmIdTest() {
@@ -49,7 +48,7 @@ public class AppTest {
 
         assertEquals(expectedId, World.getFarm().getFarmId());
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void farmSizeTest() {
@@ -60,8 +59,7 @@ public class AppTest {
 
         assertEquals(expectedDefault, World.getFarm().size());
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void expandingTheFarmTest() {
@@ -82,9 +80,8 @@ public class AppTest {
 
         assertEquals(secondExpansion, World.getFarm().size());
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
+        farmManager.defunct(World.getFarm().getFarmId());
 
-        assertEquals(0, World.getNumFarms());
     }
 
     @Test public void sellingAcresTest() {
@@ -101,8 +98,7 @@ public class AppTest {
         assertEquals(expectedSize, World.getFarm().size());
         assertEquals((Double) expectedBalance, (Double) Bank.accountBalance(World.getFarm().getFarmId()));
         
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void taxRateTest() {
@@ -121,8 +117,7 @@ public class AppTest {
         taxRate = 1.1875;
         assertEquals((Double) taxRate, (Double) World.getFarm().getTaxRate());
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void emptyAcreTest() {
@@ -135,8 +130,7 @@ public class AppTest {
 
         assertEquals(expectedEmpty, actualEmpty);
         
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void plantingTest() {
@@ -154,8 +148,7 @@ public class AppTest {
         assertEquals(expectedPlanted, actualPlanted);
         assertEquals((Double) expectedBalance, (Double) actualBalance);
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void cropLifeCycleTest() {
@@ -177,8 +170,7 @@ public class AppTest {
 
         assertNotEquals(originalBalace, newBalance);
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void plantTypeCreationTest() {
@@ -227,7 +219,7 @@ public class AppTest {
 
         assertNotEquals(originalBalace, newBalance);
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
+        farmManager.defunct(World.getFarm().getFarmId());
 
     }
 
@@ -246,16 +238,8 @@ public class AppTest {
 
         assertNotEquals(firstFarmId, secondFarmId);
 
-        assertEquals(2, World.getNumFarms());
-
-        farmManager.expellFarm(firstFarmId);
-
-        assertEquals(1, World.getNumFarms());
-
-        farmManager.expellFarm(secondFarmId);
-
-        assertEquals(0, World.getNumFarms());
-        
+        farmManager.defunct(firstFarmId);
+        farmManager.defunct(secondFarmId);        
     }
 
     @Test public void collectTest() {
@@ -275,8 +259,7 @@ public class AppTest {
 
         assertNotEquals(originalBalance, singleCollectBalance);
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void livestockTypeCreationTest() {
@@ -321,8 +304,7 @@ public class AppTest {
         double harvestBalance = Bank.accountBalance(World.getFarm().getFarmId());
         assertNotEquals(collectBalance, harvestBalance, 0.05);
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void weedCostTest() {
@@ -357,19 +339,139 @@ public class AppTest {
 
         farmManager.auditCrops();
 
-        farmManager.expellFarm(World.getFarm().getFarmId());
-        assertEquals(0, World.getNumFarms());
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 
     @Test public void dogsTest() {
+
+        farmManager.newFarm();
+
+        farmManager.addDogs("40");
+        
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(100001);
+        int level = 2;
+        assertEquals(level, World.getFarm().getLevel());
+
+        farmManager.addDogs("30");
+
+        int dogCoverage = World.getFarm().getDogCoverage();
+        int expectedDogCoverage = 30;
+
+        assertEquals(expectedDogCoverage, dogCoverage);
+
+        boolean notAllowed = World.getFarm().addGroundCover(40);
+        boolean expectedResult = false;
+
+        assertEquals(expectedResult, notAllowed);
+
+        farmManager.defunct(World.getFarm().getFarmId());
         
     }
 
     @Test public void groundcoverTest() {
+
+        farmManager.newFarm();
         
+        farmManager.addGroundCover("43");
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(100001);
+        int level = 2;
+        assertEquals(level, World.getFarm().getLevel());
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(100001);
+        level = 3;
+        assertEquals(level, World.getFarm().getLevel());
+
+        farmManager.addGroundCover("40");
+
+        int expectedGroundCover = 40;
+        int actualGroundCover = World.getFarm().getGroundCoverage();
+
+        assertEquals(expectedGroundCover, actualGroundCover);
+
+        farmManager.defunct(World.getFarm().getFarmId());
+
     }
 
-    @Test public void Test() {
+    @Test public void levelModificationTest() {
+
+        farmManager.newFarm();
+
+        int expectedWeedRisk = 50;
+        int expectedPredatorRisk = 50;
+
+        int actualWeedRisk = World.getFarm().getWeedRisk();
+        int actualPredatorRisk = World.getFarm().getPredatorRisk();
+
+        assertEquals(expectedWeedRisk, actualWeedRisk);
+        assertEquals(expectedPredatorRisk, actualPredatorRisk);
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(100001);
+        int level = 2;
+        assertEquals(level, World.getFarm().getLevel());
+
+        expectedWeedRisk = 50;
+        expectedPredatorRisk = 30;
+
+        actualWeedRisk = World.getFarm().getWeedRisk();
+        actualPredatorRisk = World.getFarm().getPredatorRisk();
+
+        assertEquals(expectedWeedRisk, actualWeedRisk);
+        assertEquals(expectedPredatorRisk, actualPredatorRisk);
+
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(100001);
+        level = 3;
+        assertEquals(level, World.getFarm().getLevel());
+
+        expectedWeedRisk = 25;
+        expectedPredatorRisk = 25;
+
+        actualWeedRisk = World.getFarm().getWeedRisk();
+        actualPredatorRisk = World.getFarm().getPredatorRisk();
+
+        assertEquals(expectedWeedRisk, actualWeedRisk);
+        assertEquals(expectedPredatorRisk, actualPredatorRisk);
+
+        farmManager.defunct(World.getFarm().getFarmId());
+    }
+
+    @Test public void farmDefunctTest() {
+
+        farmManager.newFarm();
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeWithdrawl(299700);
+
+        int expectedNumberOfFarms = 0;
+        int actualFarms = World.getNumFarms();
+
+        assertEquals(expectedNumberOfFarms, actualFarms);
+
+    }
+
+    @Test public void farmSuccessTest() {
+
+        int expectedNumberOfFarms = 0;
+        int actualFarms = World.getNumFarms();
+
+        assertEquals(expectedNumberOfFarms, actualFarms);
+        expectedNumberOfFarms = 1;
         
+        farmManager.newFarm();
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(100001);
+        int level = 2;
+        assertEquals(level, World.getFarm().getLevel());
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(100001);
+        level = 3;
+        assertEquals(level, World.getFarm().getLevel());
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(200000);
+
+        actualFarms = World.getNumFarms();
+
+        assertEquals(expectedNumberOfFarms, actualFarms);
+        farmManager.defunct(World.getFarm().getFarmId());
     }
 }
