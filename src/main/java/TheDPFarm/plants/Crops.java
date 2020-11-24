@@ -64,7 +64,7 @@ public abstract class Crops implements Plant {
      * certain events occuring to this plant.
      */
     public void notifyNight() {
-        int sickOdds = randGenerator.nextInt(40); // %5 chance of early death
+        int sickOdds = randGenerator.nextInt(50); // %5 chance of early death
         if (sickOdds == 2) {
             setState(State.SICK);
         } else if (currentState.getState().equals(State.SICK)) {

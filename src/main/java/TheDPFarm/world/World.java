@@ -24,6 +24,7 @@ public class World {
 
     public static void removeFarm(Farm oldFarm) {
         farmList.remove(oldFarm);
+        oldFarm = null;
     }
     
     public static Farm getFarm(int id) {

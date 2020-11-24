@@ -114,8 +114,9 @@ public class FarmManager {
     }
 
     public void removeWeeds() {
+        Bank.findAccount(World.getFarm().getFarmId())
+            .makeWithdrawl(World.getFarm().weedCost());
         World.getFarm().removeWeeds();
-        Bank.findAccount(World.getFarm().getFarmId()).makeWithdrawl(World.getFarm().weedCost());
         dlg.weedsRemoved();
     }
 

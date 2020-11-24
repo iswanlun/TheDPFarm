@@ -37,6 +37,7 @@ public class AppTest {
         assertEquals(level, World.getFarm().getLevel());
 
         farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
     }
 
     @Test public void farmIdTest() {
@@ -60,6 +61,7 @@ public class AppTest {
         assertEquals(expectedDefault, World.getFarm().size());
 
         farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
     }
 
     @Test public void expandingTheFarmTest() {
@@ -81,6 +83,8 @@ public class AppTest {
         assertEquals(secondExpansion, World.getFarm().size());
 
         farmManager.expellFarm(World.getFarm().getFarmId());
+
+        assertEquals(0, World.getNumFarms());
     }
 
     @Test public void sellingAcresTest() {
@@ -98,10 +102,7 @@ public class AppTest {
         assertEquals((Double) expectedBalance, (Double) Bank.accountBalance(World.getFarm().getFarmId()));
         
         farmManager.expellFarm(World.getFarm().getFarmId());
-    }
-
-    @Test public void specificAcreTest() {
-        
+        assertEquals(0, World.getNumFarms());
     }
 
     @Test public void taxRateTest() {
@@ -121,6 +122,7 @@ public class AppTest {
         assertEquals((Double) taxRate, (Double) World.getFarm().getTaxRate());
 
         farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
     }
 
     @Test public void emptyAcreTest() {
@@ -134,21 +136,236 @@ public class AppTest {
         assertEquals(expectedEmpty, actualEmpty);
         
         farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
     }
 
-    @Test public void harvestAcresTest() {
+    @Test public void plantingTest() {
+
+        farmManager.newFarm();
+
+        farmManager.plant("corn", "30");
+
+        int expectedPlanted = 30;
+        int actualPlanted = World.getFarm().numCropsAcres();
+
+        double expectedBalance = 262098.75;
+        double actualBalance = Bank.accountBalance(World.getFarm().getFarmId());
+
+        assertEquals(expectedPlanted, actualPlanted);
+        assertEquals((Double) expectedBalance, (Double) actualBalance);
+
+        farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
+    }
+
+    @Test public void cropLifeCycleTest() {
+        
+        farmManager.newFarm();
+
+        farmManager.plant("corn", "30");
+
+        for (int i = 0; i < 10; i++) {
+            World.TimeManager.notifyDayEvent();
+            World.TimeManager.notifyNightEvent();
+        }
+    
+
+        farmManager.harvestAcres("corn");
+
+        double originalBalace = 300000.0;
+        double newBalance = Bank.accountBalance(World.getFarm().getFarmId());
+
+        assertNotEquals(originalBalace, newBalance);
+
+        farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
+    }
+
+    @Test public void plantTypeCreationTest() {
+
+        farmManager.newFarm();
+
+        farmManager.plant("corn", "5");
+        farmManager.plant("mushrooms", "5");
+        farmManager.plant("soybeans", "5");
+        farmManager.plant("wheat", "5");
+
+        for (int i = 0; i < 10; i++) {
+            World.TimeManager.notifyDayEvent();
+            World.TimeManager.notifyNightEvent();
+        }
+
+        farmManager.harvestAcres("corn");
+        farmManager.auditCrops();
+
+        for (int i = 0; i < 2; i++) {
+            World.TimeManager.notifyDayEvent();
+            World.TimeManager.notifyNightEvent();
+        }
+
+        farmManager.harvestAcres("wheat");
+        farmManager.auditCrops();
+
+        for (int i = 0; i < 3; i++) {
+            World.TimeManager.notifyDayEvent();
+            World.TimeManager.notifyNightEvent();
+        }
+
+        farmManager.harvestAcres("soybeans");
+        farmManager.auditCrops();
+
+        for (int i = 0; i < 2; i++) {
+            World.TimeManager.notifyDayEvent();
+            World.TimeManager.notifyNightEvent();
+        }
+
+        farmManager.harvestAcres("mushrooms");
+        farmManager.auditCrops();
+
+        double originalBalace = 300000.0;
+        double newBalance = Bank.accountBalance(World.getFarm().getFarmId());
+
+        assertNotEquals(originalBalace, newBalance);
+
+        farmManager.expellFarm(World.getFarm().getFarmId());
+
+    }
+
+    
+    @Test public void BuySecondFarmTest() {
+
+        farmManager.newFarm();
+
+        int firstFarmId = World.getFarm().getFarmId();
+
+        Bank.findAccount(World.getFarm().getFarmId()).makeDeposit(300000);
+
+        farmManager.newFarm();
+
+        int secondFarmId = World.getFarm().getFarmId();
+
+        assertNotEquals(firstFarmId, secondFarmId);
+
+        assertEquals(2, World.getNumFarms());
+
+        farmManager.expellFarm(firstFarmId);
+
+        assertEquals(1, World.getNumFarms());
+
+        farmManager.expellFarm(secondFarmId);
+
+        assertEquals(0, World.getNumFarms());
         
     }
 
-    @Test public void collectAcresTest() {
-        
+    @Test public void collectTest() {
+
+        farmManager.newFarm();
+
+        farmManager.raise("hog", "30");
+
+        for (int i = 0; i < 3; i++) {
+            World.TimeManager.notifyDayEvent();
+            World.TimeManager.notifyNightEvent();
+        }
+        farmManager.collectProducts("hog");
+
+        double originalBalance = 178716.0;
+        double singleCollectBalance = Bank.accountBalance(World.getFarm().getFarmId());
+
+        assertNotEquals(originalBalance, singleCollectBalance);
+
+        farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
     }
 
-    @Test public void cropAndLivestockAcresTest() {
+    @Test public void livestockTypeCreationTest() {
+
+        farmManager.newFarm();
+
+        farmManager.raise("hog", "5");
+        farmManager.raise("chicken", "5");
+        farmManager.raise("cattle", "5");
+        farmManager.raise("sheep", "5");
+
+        for (int j = 0; j < 4; j++) {
+
+            for (int i = 0; i < 3; i++) {
+                World.TimeManager.notifyDayEvent();
+                World.TimeManager.notifyNightEvent();
+            }
+
+            farmManager.collectProducts("hog");
+            farmManager.collectProducts("chicken");
+            farmManager.collectProducts("cow");
+            farmManager.collectProducts("sheep");
+
+            farmManager.auditLivestock();
+        }
+
+        double originalBalance = 201176.0;
+        double collectBalance = Bank.accountBalance(World.getFarm().getFarmId());
+
+        assertNotEquals(originalBalance, collectBalance, 0.05);
+
+        for (int i = 0; i < 2; i++) {
+            World.TimeManager.notifyDayEvent();
+            World.TimeManager.notifyNightEvent();
+        }
+
+        farmManager.harvestAcres("hog");
+        farmManager.harvestAcres("chicken");
+        farmManager.harvestAcres("cow");
+        farmManager.harvestAcres("sheep");
         
+        double harvestBalance = Bank.accountBalance(World.getFarm().getFarmId());
+        assertNotEquals(collectBalance, harvestBalance, 0.05);
+
+        farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
     }
 
     @Test public void weedCostTest() {
+
+        farmManager.newFarm();
+
+        farmManager.plant("mushrooms", "50");
+
+        for (int i = 0; i < 17; i++) {
+            World.TimeManager.notifyDayEvent();
+            World.TimeManager.notifyNightEvent();
+        }
+
+        int daysToHarvest = 0;
+        assertEquals(daysToHarvest, World.getFarm()
+            .getSpecificAcre(3).getCrop().getDaysToHarvest());
+
+        double weedCost = World.getFarm().weedCost();
+        double noWeeds = 0.0;
+
+        assertNotEquals((Double) noWeeds, (Double) weedCost);
+
+        double beforeWeedRemoval = Bank.accountBalance(World.getFarm().getFarmId());
+
+        farmManager.removeWeeds();
+
+        double afterWeedRemoval = Bank.accountBalance(World.getFarm().getFarmId());
+
+        assertNotEquals((Double) beforeWeedRemoval, (Double) afterWeedRemoval);
+
+        farmManager.harvestAcres("mushrooms");
+
+        farmManager.auditCrops();
+
+        farmManager.expellFarm(World.getFarm().getFarmId());
+        assertEquals(0, World.getNumFarms());
+    }
+
+    @Test public void dogsTest() {
+        
+    }
+
+    @Test public void groundcoverTest() {
         
     }
 

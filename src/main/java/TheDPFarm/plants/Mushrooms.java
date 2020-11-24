@@ -12,8 +12,8 @@ public class Mushrooms extends Crops {
     public Mushrooms(PlantState state, int farmId) {
         type = AssetType.MUSHROOMS;
         harvestAge = 17;
-        costPerAcre = 270.0;
-        netPerAcre = 710.0;
+        costPerAcre = 2700.0;
+        netPerAcre = 7100.0;
 
         age = 0;
         currentState = state;
